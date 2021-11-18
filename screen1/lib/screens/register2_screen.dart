@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:screen1/screens/logg_screen.dart';
+import 'package:screen1/screens/min2.dart';
 
 import 'end_drawer_screen.dart';
 
@@ -113,10 +115,7 @@ class _RegisterScreenState2 extends State<RegisterScreen2> {
                           ),
                           color: Colors.white,
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoggScreen()));
+
                           },
                           child: Text(
                             'Avbryt',
@@ -144,7 +143,11 @@ class _RegisterScreenState2 extends State<RegisterScreen2> {
                           fontSize: 12,
                           fontFamily: 'Roboto-Light',
                         )),
+
                     TextSpan(
+                      recognizer: new TapGestureRecognizer()..onTap=(){
+                       Navigator.push(context, MaterialPageRoute(builder: (context)=>Min2Screen()));
+                      },
                         text:
                         'hur du avbryter prenumerationen, användarvillkor och integritetspolicy',
                         style: TextStyle(

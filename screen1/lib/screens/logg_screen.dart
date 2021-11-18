@@ -1,3 +1,4 @@
+import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../models/logg_model.dart';
@@ -9,6 +10,9 @@ class LoggScreen extends StatefulWidget {
 }
 
 class _LoggScreenState extends State<LoggScreen> {
+  bool _expanded = false;
+  bool _customTileExpanded = false;
+  var _test = "Full Screen";
   String? valueLesson;
 
   final items = ['All', '2 days ago', '1 month ago', '2 months ago'];
@@ -28,79 +32,150 @@ class _LoggScreenState extends State<LoggScreen> {
               'Logg',
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18,
-                  fontFamily: 'Roboto-Meidum'),
+                  fontSize: 28,
+                  fontFamily: 'Roboto-Medium'),
             ),
           ),
         ),
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(30, 30, 0, 0),
-                  child: DropdownButton(
-                    hint: Text('Filter'),
-                    dropdownColor: Colors.white,
-                    value: valueLesson,
-                    onChanged: (newValue) {
-                      setState(() {
-                        valueLesson = newValue as String?;
-                      });
-                    },
-                    items: items.map((valueLesson) {
-                      return DropdownMenuItem(
-                        value: valueLesson,
-                        child: Text(valueLesson),
-                      );
-                    }).toList(),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(145, 30, 0, 0),
-                  child: IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      _showDialog(context);
-                    },
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              height: 400,
-              width: 320,
-              child:
-                  ListView.builder(itemCount: loggList.length,itemBuilder: (BuildContext context, index) {
-                return Container(
-                  height: 100,
-                  margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                  decoration: BoxDecoration(
-                      color: Color(0xff50B6C7),
-                    borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: Container(
-                    margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(loggList[index].title,style: TextStyle(fontFamily: 'Roboto-Medium',fontSize: 17,color: Colors.white),),
-                        SizedBox(height: 15,),
-                        Row(
-                          children: [Text(loggList[index].date,style: TextStyle(fontFamily: 'Roboto-Light',fontSize: 12,color: Colors.white)),
-                            SizedBox(width: 20,),
-                            Text(loggList[index].time,style: TextStyle(fontFamily: 'Roboto-Light',fontSize: 12,color: Colors.white))],
-                        )
-                      ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.fromLTRB(30, 30, 0, 0),
+                    child: DropdownButton(
+                      hint: Text('Filter'),
+                      dropdownColor: Colors.white,
+                      value: valueLesson,
+                      onChanged: (newValue) {
+                        setState(() {
+                          valueLesson = newValue as String?;
+                        });
+                      },
+                      items: items.map((valueLesson) {
+                        return DropdownMenuItem(
+                          value: valueLesson,
+                          child: Text(valueLesson),
+                        );
+                      }).toList(),
                     ),
                   ),
-                );
-              }),
-            ),
-          ],
+                  Container(
+                    margin: EdgeInsets.fromLTRB(145, 30, 0, 0),
+                    child: IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () {
+                        _showDialog(context);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              // Container(
+              //   margin: EdgeInsets.all(10),
+              //   height: 400,
+              //   width: 320,
+              //   child:
+              //   ListView.builder(itemCount: loggList.length,itemBuilder: (BuildContext context, index) {
+              //     return Container(
+              //       height: 100,
+              //       margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              //       decoration: BoxDecoration(
+              //           color: Color(0xff50B6C7),
+              //         borderRadius: BorderRadius.circular(10)
+              //       ),
+              //       child: Container(
+              //         margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
+              //         child: Column(
+              //           crossAxisAlignment: CrossAxisAlignment.start,
+              //           children: [
+              //             Text(loggList[index].title,style: TextStyle(fontFamily: 'Roboto-Medium',fontSize: 17,color: Colors.white),),
+              //             SizedBox(height: 15,),
+              //             Row(
+              //               children: [Text(loggList[index].date,style: TextStyle(fontFamily: 'Roboto-Light',fontSize: 12,color: Colors.white)),
+              //                 SizedBox(width: 20,),
+              //                 Text(loggList[index].time,style: TextStyle(fontFamily: 'Roboto-Light',fontSize: 12,color: Colors.white))],
+              //             )
+              //           ],
+              //         ),
+              //       ),
+              //     );
+              //   }),
+              // ),
+
+              Container(
+                margin: EdgeInsets.all(10),
+                height: 500,
+                width: 320,
+                child: ListView.builder(
+                    itemCount: loggList.length,
+                    itemBuilder: (BuildContext contex, index) {
+                      return SingleChildScrollView(
+                        // height: 90,
+                        //       margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        //       decoration: BoxDecoration(
+                        //           color: Color(0xff50B6C7),
+                        //         borderRadius: BorderRadius.circular(10)
+                        //       ),
+                        child: Container(
+                          margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                          decoration: BoxDecoration(
+                              color: Color(0xff50B6C7),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Column(
+                            children: [
+                              ExpansionTile(
+
+                                title: Container(
+                                  child: Text(
+                                    loggList[index].title,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+
+                                subtitle: Row(
+                                  children: [
+                                    Text(loggList[index].date,
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto-Light',
+                                            fontSize: 12,
+                                            color: Colors.white)),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Text(loggList[index].time,
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto-Light',
+                                            fontSize: 12,
+                                            color: Colors.white))
+                                  ],
+                                ),
+                                trailing: Icon(null),
+                                children: [
+
+                                  Container(
+                                    child: Text(
+                                      'keep1',
+                                      style: TextStyle(
+                                          fontFamily: 'Roboto-Light',
+                                          fontSize: 14,
+                                          color: Colors.white),
+
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+            ],
+          ),
         ),
       ),
       endDrawer: EndDrawerScreen(),
@@ -119,10 +194,14 @@ void _showDialog(BuildContext context) {
           new FlatButton(
             child: Row(
               children: [
-                SizedBox(width: 120,),
-                  Text('Đồng ý'),
-                 SizedBox(width: 20,),
-                 Text("Hủy"),
+                SizedBox(
+                  width: 120,
+                ),
+                Text('Đồng ý'),
+                SizedBox(
+                  width: 20,
+                ),
+                Text("Hủy"),
               ],
             ),
             onPressed: () {

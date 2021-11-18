@@ -72,7 +72,7 @@ class _OvningarScreenState extends State<OvningarScreen> {
             child: ListView.builder(
           itemBuilder: (BuildContext context, index) {
             return Container(
-              margin: EdgeInsets.fromLTRB(10, 3, 10, 0),
+              margin: EdgeInsets.fromLTRB(10, 0, 10, 5),
               height: 90,
               width: 340,
               child: Card(
@@ -83,7 +83,7 @@ class _OvningarScreenState extends State<OvningarScreen> {
                 ),
                 color: Color(0xffEAF4F5),
                 child: Container(
-                  margin: EdgeInsets.fromLTRB(10, 5, 20, 5),
+                  margin: EdgeInsets.fromLTRB(10, 0, 20, 0),
                   child: ListTile(
                     leading: CircleAvatar(
                       radius: 30,

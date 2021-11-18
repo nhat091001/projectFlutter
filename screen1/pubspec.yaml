@@ -49,6 +49,7 @@ dependencies:
   audioplayers: ^0.20.1
   cache_audio_player: ^1.0.0
   audioplayer: ^0.8.1
+  expandable: ^5.0.1
 
 
   flutter_launcher_icons: ^0.9.2
