@@ -17,6 +17,15 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
   int? selected;
 
 
+  late String default_choice ='';
+  int default_index =0;
+  List<MyChoice> choices = [
+    MyChoice(index: 1, choice: "30m"),
+    MyChoice(index: 2, choice: "1h"),
+    MyChoice(index: 3, choice: "2h"),
+  ];
+
+
   final items = [
     '1',
     '2',
@@ -140,80 +149,53 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
               children: [
 
                 Container(
+                  margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
                   child: Column(
                     children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                        child: Row(
-                          children: [
-                            Text(
+                      Row(
+                        children: [
+                          Container(
+
+                            child: Text(
                               'Frekvens',
                               style: TextStyle(color:isSwitched? Colors.black:Colors.grey, fontSize: 16),
                             ),
-                            SizedBox(
-                              width: 30,
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: Container(
+                              child: Row(
+                                children: choices.map((data) => Row(
+                                  children: [
+                                    Radio(
+                                      activeColor: Color(0xff3EAFC1),
+                                        value: data.index,
+                                        groupValue: default_index,
+                                        onChanged:isSwitched? (value){
+                                          setState(() {
+                                            default_choice=data.choice;
+                                            default_index=data.index;
+                                          });
+                                        }:null
+                                    ),
+                                    Text('${data.choice}',
+                                      style: TextStyle(
+                                          color: isSwitched ? Colors.black : Colors.grey,
+                                          fontFamily: 'Roboto-Light'),
+                                    ),
+                                  ],
+                                )
+                                ).toList(),
+
+                              ),
                             ),
-
-                            Radio(
-
-                                 //isSwitched? Colors.black:Colors.grey, fontSize: 16,
-                                activeColor: Color(0xff3EAFC1),
-                                value: 1,
-                                groupValue: selected,
-                                onChanged:isSwitched?(val) {
-                                      (val){
-                                    setState(() {
-                                      print(val);
-                                    });
-                                  };
-                                  print(val);
-                                  setSelectedRadio(val as int);
-                                }:null),
-                            Text('30m',
-                                style: TextStyle(
-                                    color:isSwitched? Colors.black:Colors.grey,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold)),
-                            Radio(
-                                activeColor: Color(0xff3EAFC1),
-                                value: 2,
-                                groupValue: selected,
-                                onChanged:isSwitched?(val) {
-                                      (val){
-                                    setState(() {
-                                      print(val);
-                                    });
-                                  };
-                                  print(val);
-                                  setSelectedRadio(val as int);
-                                }:null),
-                            Text('1h',
-                                style: TextStyle(
-                                    color:isSwitched? Colors.black:Colors.grey,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold)),
-                            Radio(
-                                activeColor: Color(0xff3EAFC1),
-                                value: 3,
-                                groupValue: selected,
-                                onChanged:isSwitched? (val) {
-
-                                      (val){
-                                    setState(() {
-                                      print(val);
-                                    });
-                                  };
-                                  print(val);
-                                  setSelectedRadio(val as int);
-                                }:null),
-                            Text('2h',
-                                style: TextStyle(
-                                    color:isSwitched? Colors.black:Colors.grey,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold)),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
+
 
                       SizedBox(
                         height: 40,
@@ -227,24 +209,37 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Start',textAlign: TextAlign.center,style: TextStyle(color:isSwitched? Colors.black:Colors.grey,fontSize: 16,fontFamily: 'Roboto-Light'),),
+                                  Text(
+                                    'Start',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: isSwitched ? Colors.black : Colors.grey,
+                                        fontSize: 16,
+                                        fontFamily: 'Roboto-Light'),
+                                  ),
                                   DropdownButton(
-                                    hint: Text('Select item: ',style: TextStyle(color:isSwitched? Colors.black:Colors.grey,fontSize: 14,fontFamily: 'Roboto-Light')),
+                                    hint: Text('Select item: ',
+                                        style: TextStyle(
+                                            color:
+                                            isSwitched ? Colors.black : Colors.grey,
+                                            fontSize: 14,
+                                            fontFamily: 'Roboto-Light')),
                                     dropdownColor: Colors.white,
                                     underline: Container(
                                       height: 40,
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(6),
-                                        border: Border.all(color: Colors.black38)
-                                      ),
+                                          borderRadius: BorderRadius.circular(6),
+                                          border: Border.all(color: Colors.black38)),
                                     ),
                                     value: valueChoose,
-                                    onChanged:isSwitched?(newValue) {
+                                    onChanged: isSwitched
+                                        ? (newValue) {
                                       setState(() {
-                                        if(newValue!=null)
-                                        valueChoose = newValue as String?;
+                                        if (newValue != null)
+                                          valueChoose = newValue as String?;
                                       });
-                                    }:null,
+                                    }
+                                        : null,
                                     items: items.map((valueItem) {
                                       return DropdownMenuItem(
                                         value: valueItem,
@@ -262,25 +257,35 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Stopp',style: TextStyle(color:isSwitched? Colors.black:Colors.grey,fontSize: 16,fontFamily: 'Roboto-Light')),
+                                  Text('Stopp',
+                                      style: TextStyle(
+                                          color:
+                                          isSwitched ? Colors.black : Colors.grey,
+                                          fontSize: 16,
+                                          fontFamily: 'Roboto-Light')),
                                   DropdownButton(
                                     elevation: 0,
                                     underline: Container(
                                       height: 40,
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(6),
-                                          border: Border.all(color: Colors.black38)
-                                      ),
+                                          border: Border.all(color: Colors.black38)),
                                     ),
-                                    hint: Text('Select item: ',style: TextStyle(color:isSwitched? Colors.black:Colors.grey,fontSize: 14,fontFamily: 'Roboto-Light')),
+                                    hint: Text('Select item: ',
+                                        style: TextStyle(
+                                            color:
+                                            isSwitched ? Colors.black : Colors.grey,
+                                            fontSize: 14,
+                                            fontFamily: 'Roboto-Light')),
                                     dropdownColor: Colors.white,
                                     value: valueChoose1,
-                                    onChanged:isSwitched?(newValue1) {
+                                    onChanged: isSwitched
+                                        ? (newValue1) {
                                       setState(() {
                                         valueChoose1 = newValue1 as String?;
-
                                       });
-                                    }:null,
+                                    }
+                                        : null,
                                     items: items1.map((valueItem1) {
                                       return DropdownMenuItem(
                                         value: valueItem1,
@@ -335,33 +340,47 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                 ),
 
                 Container(
+                 decoration: BoxDecoration(
+                     color: valueChoose != null && valueChoose1 != null && default_index>=1
+                         ? Color(0xff3EAFC1)
+                         : Colors.grey,
+                   borderRadius: BorderRadius.circular(10)
+                 ),
                   width: 300,
                   height: 50,
-                  color:  Color(0xff3EAFC1),
-                  child: FlatButton(
 
-                    onPressed: (){
-
-                      if(_formKey.currentState!.validate()){
-                        ScaffoldMessenger.of(context).showSnackBar( SnackBar(backgroundColor: Colors.blue,content: isSwitched?Text('Clicked'):Text('not cliecked')));
-                      }
-                    },
-                    child: Text('SPARA',style: TextStyle(color: Colors.white, fontSize: 18)),
+                  child: RaisedButton(
+                    elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                    color: Color(0xff3EAFC1),
+                    onPressed: valueChoose != null && valueChoose1 != null && default_index>=1
+                        ? () {
+                      setState(() {
+                        print(valueChoose);
+                        print(valueChoose1);
+                        print(default_index);
+                      });
+                    }
+                        : null,
+                    child: Text('SPARA2',
+                        style: TextStyle(color: Colors.white, fontSize: 18)),
                   ),
                 ),
 
-                SizedBox(height: 50,),
-                Container(
-                  width: 300,
-                  height: 50,
-                  color:  Color(0xff3EAFC1),
-                  child: FlatButton(
-                    onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>TestValidate()));
-                    },
-                    child: Text('SPARA2',style: TextStyle(color: Colors.white, fontSize: 18)),
-                  ),
-                ),
+                // SizedBox(height: 50,),
+                // Container(
+                //   width: 300,
+                //   height: 50,
+                //   color:  Color(0xff3EAFC1),
+                //   child: FlatButton(
+                //     onPressed: (){
+                //       Navigator.push(context, MaterialPageRoute(builder: (context)=>TestValidate()));
+                //     },
+                //     child: Text('SPARA2',style: TextStyle(color: Colors.white, fontSize: 18)),
+                //   ),
+                // ),
               ],
           ),
         ),

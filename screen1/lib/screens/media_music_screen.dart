@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:screen1/screens/bottom_button_screen.dart';
 import 'package:screen1/screens/end_drawer_screen.dart';
 import 'package:custom_check_box/custom_check_box.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -302,7 +303,7 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
                   iconSize: 30,
                   color: Colors.white,
                   onPressed: () {
-                    Navigator.pop(context);
+                  //  Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomButtonScreen()));
                   },
                   icon: Icon(Icons.playlist_add_check_rounded))
             ],

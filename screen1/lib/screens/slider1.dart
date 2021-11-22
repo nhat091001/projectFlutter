@@ -4,7 +4,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_circular_slider/flutter_circular_slider.dart';
 
-
 class SleepPage extends StatefulWidget {
   const SleepPage({Key? key}) : super(key: key);
 
@@ -54,7 +53,6 @@ class _SleepPageState extends State<SleepPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             SingleCircularSlider(
               288,
               endTime,
@@ -67,29 +65,23 @@ class _SleepPageState extends State<SleepPage> {
               showRoundedCapInSelection: true,
               showHandlerOutter: false,
               child: Container(
-                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(height: 20),
                       Text('${_formatIntervalTime(inBedTime, outBedTime)}',
-                          style: TextStyle(fontSize: 50.0, color: Colors.white)),
-
+                          style:
+                              TextStyle(fontSize: 50.0, color: Colors.white)),
                     ],
                   )),
               shouldCountLaps: true,
             ),
-
-
           ],
         ),
       ),
     );
   }
-
-
-
-
 
   String _formatIntervalTime(int init, int end) {
     var sleepTime = end > init ? end - init : 288 - init + end;

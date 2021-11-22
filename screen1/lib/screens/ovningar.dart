@@ -9,13 +9,12 @@ import 'meditation_screen.dart';
 import 'omhjarnfokus_screen.dart';
 import 'smakprov_boken_screen.dart';
 import 'paminelser_screen.dart';
+import 'bottom_button_screen.dart';
 import 'min_profil_screen.dart';
 import '../drawer_screen.dart';
 import '../models/ovningar_list_model.dart';
 
 class OvningarScreen extends StatefulWidget {
-
-
   @override
   _OvningarScreenState createState() => _OvningarScreenState();
 }
@@ -69,180 +68,279 @@ class _OvningarScreenState extends State<OvningarScreen> {
           ),
         ),
         body: SafeArea(
-            child: ListView.builder(
-          itemBuilder: (BuildContext context, index) {
-            return Container(
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 5),
-              height: 90,
-              width: 340,
-              child: Card(
-                borderOnForeground: false,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                color: Color(0xffEAF4F5),
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(10, 0, 20, 0),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
-                      backgroundImage: AssetImage(
-                        ovingarList[index].images,
+            child: Stack(
+          children: [
+            ListView.builder(
+              itemBuilder: (BuildContext context, index) {
+                return Container(
+                  margin: EdgeInsets.fromLTRB(10, 0, 10, 5),
+                  height: 90,
+                  width: 340,
+                  child: Card(
+                    borderOnForeground: false,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    color: Color(0xffEAF4F5),
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          radius: 30,
+                          backgroundImage: AssetImage(
+                            ovingarList[index].images,
+                          ),
+                        ),
+                        title: Text(
+                          ovingarList[index].title,
+                          style: TextStyle(
+                              color: Color(0xff378591),
+                              fontFamily: 'Roboto-Medium',
+                              fontSize: 18),
+                        ),
+                        subtitle: Text(
+                          ovingarList[index].subtileText,
+                          style: TextStyle(
+                              color: Color(0xff378591),
+                              fontFamily: 'Roboto-Light',
+                              fontSize: 15),
+                        ),
+                        onTap: () {
+                          OvingarListModel ovingarListModel = OvingarListModel(
+                              images: ovingarList[index].images,
+                              title: ovingarList[index].title,
+                              subtileText: ovingarList[index].subtileText);
+                          print('this is ${ovingarList[index].title}');
+                          setState(() {
+                            if (index == 0) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 1) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 2) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 3) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 4) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 5) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 6) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 7) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 8) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 9) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 10) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 11) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 12) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 13) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 14) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 15) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 16) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 17) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MediaMusicScreen(
+                                            image: ovingarListModel.images,
+                                            title: ovingarListModel.title,
+                                            subline:
+                                                ovingarListModel.subtileText,
+                                          )));
+                            }
+                            if (index == 18) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SleepPage()));
+                            }
+                            if (index == 19) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ClockScreen()));
+                            }
+                          });
+                        },
                       ),
                     ),
-                    title: Text(
-                      ovingarList[index].title,
-                      style: TextStyle(
-                          color: Color(0xff378591),
-                          fontFamily: 'Roboto-Medium',
-                          fontSize: 18),
-                    ),
-                    subtitle: Text(
-                      ovingarList[index].subtileText,
-                      style: TextStyle(
-                          color: Color(0xff378591),
-                          fontFamily: 'Roboto-Light',
-                          fontSize: 15),
-                    ),
-                    onTap: () {
-                      OvingarListModel ovingarListModel=OvingarListModel(images: ovingarList[index].images, title:  ovingarList[index].title, subtileText: ovingarList[index].subtileText);
-                      print('this is ${ovingarList[index].title}');
-                      setState(() {
-                        if (index == 0) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 1) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 2) {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 3) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 4) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 5) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 6) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 7) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 8) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 9) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 10) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 11) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 12) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 13) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 14) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 15) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 16) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 17) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MediaMusicScreen(image: ovingarListModel.images,title: ovingarListModel.title,subline: ovingarListModel.subtileText,)));
-                        }
-                        if (index == 18) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SleepPage()));
-                        }
-                        if (index == 19) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ClockScreen()));
-                        }
-                      });
-                    },
                   ),
-                ),
-              ),
-            );
-          },
-          itemCount: ovingarList.length,
-          shrinkWrap: true,
-          //padding: EdgeInsets.all(10),
-          scrollDirection: Axis.vertical,
+                );
+              },
+              itemCount: ovingarList.length,
+              shrinkWrap: true,
+              //padding: EdgeInsets.all(10),
+              scrollDirection: Axis.vertical,
+            ),
+            BottomButtonScreen(title: 'ovingarList[index].title',images: '',subline: '',)
+
+          ],
         )),
         endDrawer: EndDrawerScreen());
   }
+
+
 }
-
-
-
-
