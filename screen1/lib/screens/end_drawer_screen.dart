@@ -45,7 +45,7 @@ class _EndDrawerScreenState extends State<EndDrawerScreen> {
   Widget build(BuildContext context) {
     return Drawer(
         child: Container(
-      padding: EdgeInsets.fromLTRB(0, 94, 0, 0),
+      padding: EdgeInsets.fromLTRB(0, 90, 0, 0),
       color: Color(0xFF3EAFC1),
       child: Column(
         children: [

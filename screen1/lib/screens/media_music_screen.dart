@@ -4,14 +4,20 @@ import 'package:screen1/screens/bottom_button_screen.dart';
 import 'package:screen1/screens/end_drawer_screen.dart';
 import 'package:custom_check_box/custom_check_box.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:screen1/screens/paminelser_screen.dart';
 import '../models/ovningar_list_model.dart';
+import 'package:screen1/screens/ovningar.dart';
+import 'ovningar.dart';
 
 class MediaMusicScreen extends StatefulWidget {
-  MediaMusicScreen(
-      {required this.title, required this.image, required this.subline});
-  final String title;
-  final String image;
-  final String subline;
+  // MediaMusicScreen(
+  //     {required this.title, required this.image, required this.subline});
+  // final String title;
+  // final String image;
+  // final String subline;
+
+  final OvingarListModel ovingarListModel;
+  MediaMusicScreen(this.ovingarListModel);
   @override
   _MediaMusicScreenState createState() => _MediaMusicScreenState();
 }
@@ -45,7 +51,7 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
   // chúng ta sẽ tạo một thanh trượt tùy chỉnh
   Widget slider() {
     return Container(
-      width: 250.0,
+      width: 290.0,
       child: Slider.adaptive(
           activeColor: Colors.white,
           inactiveColor: Colors.red,
@@ -101,17 +107,15 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:isClicked? EdgeInsets.fromLTRB(0, 656, 0, 0):EdgeInsets.all(0),
-
+      margin:isClicked? EdgeInsets.fromLTRB(0, 660, 0, 0):EdgeInsets.all(0),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+
         home: GestureDetector(
           onTap: (){
-            print('đã cleick');
             setState(() {
-              isClicked=!isClicked;
-
-
+            isClicked=!isClicked;
+            return null;
             });
           },
           child: Container(
@@ -130,16 +134,32 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
                         color: Colors.white, fontSize: 12, fontFamily: 'Roboto-Medium'),
                   ),
                 ),
-                leading: IconButton(
-                  iconSize: 20,
-                  color: Colors.white,
-                  icon: Icon(FontAwesomeIcons.chevronDown),
-                  onPressed: () {
+                leading: GestureDetector(
+                  child: Icon(FontAwesomeIcons.chevronDown,size: 25,),
+                  onTap:(){
                     setState(() {
+                      //Navigator.pop(context);
+                    // isClicked=!isClicked;
                       isClicked=!isClicked;
+
+                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>Navigator()));
                     });
                   },
                 ),
+                // leading: IconButton(
+                //   iconSize: 20,
+                //   color: Colors.white,
+                //   icon: Icon(FontAwesomeIcons.chevronDown),
+                //   onPressed:isClicked?() {
+                //     Navigator.pop(context);
+                //   }:
+                //
+                //     () {
+                //     setState(() {
+                //       isClicked=!isClicked;
+                //     });
+                //   },
+                // ),
               ),
               body:Container(
                 alignment: Alignment.center,
@@ -213,7 +233,7 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
                     width: 200,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                      image: AssetImage(widget.image),
+                      image: AssetImage(widget.ovingarListModel.images),
                     )),
                   ),
                   SizedBox(
@@ -223,7 +243,7 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
                     child: Column(
                       children: [
                         Text(
-                          widget.title,
+                          widget.ovingarListModel.title,
                           style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Roboto-Light',
@@ -233,7 +253,7 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
                           height: 20,
                         ),
                         Text(
-                          widget.subline,
+                         widget.ovingarListModel.subtileText,
                           style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Roboto-Light',
@@ -328,6 +348,7 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
                   SizedBox(
                     height: 60,
                   ),
+
                   Row(
                     children: [
                       Checkbox(
@@ -372,3 +393,4 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
     );
   }
 }
+OvingarListModel ovingarListModel=OvingarListModel(images: 'assets/images/logo.png', title: 'title', subtileText: 'subtileText');

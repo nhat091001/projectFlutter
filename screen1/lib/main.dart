@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './screens/splash_screen.dart';
-
+import 'package:screen1/screens/ovningar.dart';
 void main() {
   // SystemChrome.setSystemUIOverlayStyle(
   //     SystemUiOverlayStyle(statusBarColor: Colors.orange));
@@ -17,6 +17,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.orange),
       title: 'test1',
