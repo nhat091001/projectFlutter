@@ -4,9 +4,9 @@ class OvingarListModel {
   OvingarListModel(
       {required this.images, required this.title, required this.subtileText});
 
-  final String title;
-  final String images;
-  final String subtileText;
+  String title;
+  String images;
+  String subtileText;
 }
 
 List<OvingarListModel> ovingarList = <OvingarListModel>[

@@ -74,37 +74,7 @@ class _LoggScreenState extends State<LoggScreen> {
                   ),
                 ],
               ),
-              // Container(
-              //   margin: EdgeInsets.all(10),
-              //   height: 400,
-              //   width: 320,
-              //   child:
-              //   ListView.builder(itemCount: loggList.length,itemBuilder: (BuildContext context, index) {
-              //     return Container(
-              //       height: 100,
-              //       margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-              //       decoration: BoxDecoration(
-              //           color: Color(0xff50B6C7),
-              //         borderRadius: BorderRadius.circular(10)
-              //       ),
-              //       child: Container(
-              //         margin: EdgeInsets.fromLTRB(20, 20, 0, 0),
-              //         child: Column(
-              //           crossAxisAlignment: CrossAxisAlignment.start,
-              //           children: [
-              //             Text(loggList[index].title,style: TextStyle(fontFamily: 'Roboto-Medium',fontSize: 17,color: Colors.white),),
-              //             SizedBox(height: 15,),
-              //             Row(
-              //               children: [Text(loggList[index].date,style: TextStyle(fontFamily: 'Roboto-Light',fontSize: 12,color: Colors.white)),
-              //                 SizedBox(width: 20,),
-              //                 Text(loggList[index].time,style: TextStyle(fontFamily: 'Roboto-Light',fontSize: 12,color: Colors.white))],
-              //             )
-              //           ],
-              //         ),
-              //       ),
-              //     );
-              //   }),
-              // ),
+
 
               Container(
                 margin: EdgeInsets.all(10),
@@ -114,12 +84,7 @@ class _LoggScreenState extends State<LoggScreen> {
                     itemCount: loggList.length,
                     itemBuilder: (BuildContext contex, index) {
                       return SingleChildScrollView(
-                        // height: 90,
-                        //       margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                        //       decoration: BoxDecoration(
-                        //           color: Color(0xff50B6C7),
-                        //         borderRadius: BorderRadius.circular(10)
-                        //       ),
+
                         child: Container(
                           margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                           decoration: BoxDecoration(
@@ -154,16 +119,25 @@ class _LoggScreenState extends State<LoggScreen> {
                                   ],
                                 ),
                                 trailing: Icon(null),
+
                                 children: [
-
                                   Container(
-                                    child: Text(
-                                      'keep1',
-                                      style: TextStyle(
-                                          fontFamily: 'Roboto-Light',
-                                          fontSize: 14,
-                                          color: Colors.white),
+                                    child: Column(
+                                      children: [
+                                        Divider(color: Colors.white,),
+                                        Container(
+                                          margin: EdgeInsets.fromLTRB(0, 0, 250, 0),
+                                          child: Text(
+                                            'keep1',
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                                fontFamily: 'Roboto-Light',
+                                                fontSize: 14,
+                                                color: Colors.white),
 
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
@@ -191,7 +165,7 @@ void _showDialog(BuildContext context) {
         title: new Text("Alert!!"),
         content: new Text("You are awesome!"),
         actions: <Widget>[
-          new FlatButton(
+          new ElevatedButton(
             child: Row(
               children: [
                 SizedBox(

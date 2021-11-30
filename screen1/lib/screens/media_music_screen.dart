@@ -23,7 +23,7 @@ class MediaMusicScreen extends StatefulWidget {
 }
 
 class _MediaMusicScreenState extends State<MediaMusicScreen> {
-  bool isClicked=false;
+  bool isClicked = false;
   var duration = 20.0;
   bool checkedLesson = true;
   bool clickedImg = true;
@@ -51,7 +51,7 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
   // chúng ta sẽ tạo một thanh trượt tùy chỉnh
   Widget slider() {
     return Container(
-      width: 290.0,
+      width: 240.0,
       child: Slider.adaptive(
           activeColor: Colors.white,
           inactiveColor: Colors.red,
@@ -107,70 +107,150 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:isClicked? EdgeInsets.fromLTRB(0, 660, 0, 0):EdgeInsets.all(0),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
+      color: Colors.orange,
+      // padding: isClicked
+      //     ? EdgeInsets.fromLTRB(0, 300, 0, 0)
+      //     : EdgeInsets.fromLTRB(0, 0, 0, 0),
+      height: isClicked
+          ? MediaQuery.of(context).size.height * 0.18
+          : MediaQuery.of(context).size.height,
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            isClicked = !isClicked;
+          });
+        },
+        child: Scaffold(
+          backgroundColor: Color(0xff7EDAE8),
+          appBar: isClicked
+              ? null
+              : AppBar(
+                  iconTheme: IconThemeData(color: Colors.white),
+                  elevation: 0,
+                  backgroundColor: Color(0xff7EDAE8),
+                  title: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'HJÄRNFOKUS',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontFamily: 'Roboto-Medium'),
+                    ),
+                  ),
+                  leading: GestureDetector(
+                    child: Icon(
+                      FontAwesomeIcons.chevronDown,
+                      size: 25,
+                    ),
+                    onTap: () {
+                      setState(() {
+                        //Navigator.pop(context);
+                        // isClicked=!isClicked;
+                        isClicked = !isClicked;
 
-        home: GestureDetector(
-          onTap: (){
-            setState(() {
-            isClicked=!isClicked;
-            return null;
-            });
-          },
-          child: Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Scaffold(
-              backgroundColor: Color(0xff7EDAE8),
-              appBar:isClicked?null: AppBar(
-                iconTheme: IconThemeData(color: Colors.white),
-                elevation: 0,
-                backgroundColor: Color(0xff7EDAE8),
-                title: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'HJÄRNFOKUS',
-                    style: TextStyle(
-                        color: Colors.white, fontSize: 12, fontFamily: 'Roboto-Medium'),
+                        //Navigator.push(context, MaterialPageRoute(builder: (context)=>Navigator()));
+                      });
+                    },
                   ),
                 ),
-                leading: GestureDetector(
-                  child: Icon(FontAwesomeIcons.chevronDown,size: 25,),
-                  onTap:(){
-                    setState(() {
-                      //Navigator.pop(context);
-                    // isClicked=!isClicked;
-                      isClicked=!isClicked;
-
-                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>Navigator()));
-                    });
-                  },
-                ),
-                // leading: IconButton(
-                //   iconSize: 20,
-                //   color: Colors.white,
-                //   icon: Icon(FontAwesomeIcons.chevronDown),
-                //   onPressed:isClicked?() {
-                //     Navigator.pop(context);
-                //   }:
-                //
-                //     () {
-                //     setState(() {
-                //       isClicked=!isClicked;
-                //     });
-                //   },
-                // ),
-              ),
-              body:Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                child:isClicked?
-                    /////////////////////////////
-                Container(
-                  child:isClicked? Row(
-                    children: [
-                      Container(
-                        child: IconButton(
+          body: Container(
+            height: isClicked
+                ? MediaQuery.of(context).size.height * 0.14
+                : MediaQuery.of(context).size.height,
+            color: Colors.red,
+            child: Column(
+              children: [
+                Visibility(
+                  visible: isClicked ? false : true,
+                  child: Column(children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 200,
+                      width: 200,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                        image: AssetImage(widget.ovingarListModel.images),
+                      )),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      child: Column(
+                        children: [
+                          Text(
+                            widget.ovingarListModel.title,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Roboto-Light',
+                                fontSize: 26),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            widget.ovingarListModel.subtileText,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Roboto-Light',
+                                fontSize: 16),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 80,
+                    ),
+                    Container(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 0,
+                          ),
+                          Container(
+                            width: 500.0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${position.inMinutes}:${position.inSeconds.remainder(60)}",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                                slider(),
+                                Text(
+                                  "${musicLength.inMinutes}:${musicLength.inSeconds.remainder(60)}",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          iconSize: 45.0,
+                          color: Colors.blue,
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.skip_previous,
+                          ),
+                        ),
+                        IconButton(
                           iconSize: 62.0,
                           color: Colors.blue[800],
                           onPressed: () {
@@ -194,203 +274,129 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
                             playBtn,
                           ),
                         ),
-                      ),
-                      Container(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              child:isClicked?null: Text(
-                                "${position.inMinutes}:${position.inSeconds.remainder(60)}",
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                            ),
-                            slider(),
-                            Container(
-                              child:isClicked?null: Text(
-                                "${musicLength.inMinutes}:${musicLength.inSeconds.remainder(60)}",
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ):null,
-                )
-                ///////////////////////////////////////////////
-                    : Column(children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 200,
-                    width: 200,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                      image: AssetImage(widget.ovingarListModel.images),
-                    )),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    child: Column(
-                      children: [
-                        Text(
-                          widget.ovingarListModel.title,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Roboto-Light',
-                              fontSize: 26),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                         widget.ovingarListModel.subtileText,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Roboto-Light',
-                              fontSize: 16),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 80,
-                  ),
-                  Container(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 0,
-                        ),
-                        Container(
-                          width: 500.0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "${position.inMinutes}:${position.inSeconds.remainder(60)}",
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                              slider(),
-                              Text(
-                                "${musicLength.inMinutes}:${musicLength.inSeconds.remainder(60)}",
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                            ],
+                        IconButton(
+                          iconSize: 45.0,
+                          color: Colors.blue,
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.skip_next,
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        iconSize: 45.0,
-                        color: Colors.blue,
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.skip_previous,
+                    SizedBox(
+                      height: 60,
+                    ),
+                    Row(
+                      children: [
+                        Checkbox(
+                            // activeColor: Color(0xff7EDAE8),
+                            activeColor: Colors.white,
+                            checkColor: Color(0xff7EDAE8),
+                            value: this.checkedLesson,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                checkedLesson = value!;
+                              });
+                            }),
+                        SizedBox(
+                          height: 0,
                         ),
-                      ),
-                      IconButton(
-                        iconSize: 62.0,
-                        color: Colors.blue[800],
-                        onPressed: () {
-                          //here we will add the functionality of the play button
-                          if (!playing) {
-                            //now let's play the song
-                            cache.play("assets/audio/assets_note2.wav");
-                            setState(() {
-                              playBtn = Icons.pause;
-                              playing = true;
-                            });
-                          } else {
-                            _player.pause();
-                            setState(() {
-                              playBtn = Icons.play_arrow;
-                              playing = false;
-                            });
-                          }
-                        },
-                        icon: Icon(
-                          playBtn,
+                        Text(
+                          'Lägg till i loggen',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Roboto-Light',
+                              fontSize: 13),
                         ),
-                      ),
-                      IconButton(
-                        iconSize: 45.0,
-                        color: Colors.blue,
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.skip_next,
+                        SizedBox(
+                          width: 160,
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 60,
-                  ),
-
-                  Row(
-                    children: [
-                      Checkbox(
-                          // activeColor: Color(0xff7EDAE8),
-                          activeColor: Colors.white,
-                          checkColor: Color(0xff7EDAE8),
-                          value: this.checkedLesson,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              checkedLesson = value!;
-                            });
-                          }),
-                      SizedBox(
-                        height: 0,
-                      ),
-                      Text(
-                        'Lägg till i loggen',
-                        style: TextStyle(
+                        IconButton(
+                            iconSize: 30,
                             color: Colors.white,
-                            fontFamily: 'Roboto-Light',
-                            fontSize: 13),
-                      ),
-                      SizedBox(
-                        width: 160,
-                      ),
-                      IconButton(
-                          iconSize: 30,
-                          color: Colors.white,
-                          onPressed: () {
-                            //  Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomButtonScreen()));
-                          },
-                          icon: Icon(Icons.playlist_add_check_rounded))
-                    ],
-                  )
-                ]),
-              ),
-              endDrawer: EndDrawerScreen(),
+                            onPressed: () {
+                              //  Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomButtonScreen()));
+                            },
+                            icon: Icon(Icons.playlist_add_check_rounded))
+                      ],
+                    )
+                  ]),
+                ),
+                Visibility(
+                  visible: isClicked ? true : false,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.14,
+                    child: isClicked
+                        ? Row(
+                            children: [
+                              Container(
+                                child: IconButton(
+                                  iconSize: 40.0,
+                                  color: Colors.blue[800],
+                                  onPressed: () {
+//here we will add the functionality of the play button
+                                    if (!playing) {
+//now let's play the song
+                                      cache.play(
+                                          "assets/audio/assets_note2.wav");
+                                      setState(() {
+                                        playBtn = Icons.pause;
+                                        playing = true;
+                                      });
+                                    } else {
+                                      _player.pause();
+                                      setState(() {
+                                        playBtn = Icons.play_arrow;
+                                        playing = false;
+                                      });
+                                    }
+                                  },
+                                  icon: Icon(
+                                    playBtn,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      child: isClicked
+                                          ? null
+                                          : Text(
+                                              "${position.inMinutes}:${position.inSeconds.remainder(60)}",
+                                              style: TextStyle(
+                                                fontSize: 18.0,
+                                              ),
+                                            ),
+                                    ),
+                                    slider(),
+                                    Container(
+                                      child: isClicked
+                                          ? null
+                                          : Text(
+                                              "${musicLength.inMinutes}:${musicLength.inSeconds.remainder(60)}",
+                                              style: TextStyle(
+                                                fontSize: 18.0,
+                                              ),
+                                            ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
+                        : null,
+                  ),
+                ),
+              ],
             ),
           ),
+          endDrawer: EndDrawerScreen(),
         ),
       ),
     );
   }
 }
-OvingarListModel ovingarListModel=OvingarListModel(images: 'assets/images/logo.png', title: 'title', subtileText: 'subtileText');
