@@ -47,10 +47,9 @@ dependencies:
   flutter_circular_slider: ^2.5.0
   carousel_slider: ^4.0.0
   audioplayers: ^0.20.1
-  cache_audio_player: ^1.0.0
-  audioplayer: ^0.8.1
   expandable: ^5.0.1
   radio_button_form_field: ^0.0.4
+  cache_audio_player: ^1.0.0
 
 
   flutter_launcher_icons: ^0.9.2
@@ -64,6 +63,7 @@ dependencies:
   # rules and activating additional ones.
   flutter_lints: ^1.0.4
   dio: ^4.0.3
+  bloc: ^8.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -18,6 +18,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'min_profil_screen.dart';
 import '../drawer_screen.dart';
 import '../models/ovningar_list_model.dart';
+import '../models/practice_models.dart';
 
 class OvningarScreen extends StatefulWidget {
   ////////////////
@@ -29,84 +30,96 @@ class _OvningarScreenState extends State<OvningarScreen> {
   bool checkScreen = true;
   bool isClicked = false;
   bool isClicked1 = true;
-  var duration = 20.0;
   bool checkedLesson = true;
   bool clickedImg = true;
-  dynamic ovingarListModel =
-      OvingarListModel(images: '', title: '', subtileText: '');
 
-  updateSlider({newDuration}) {
-    setState(() {
-      duration = newDuration;
-    });
-  }
+  // String url =
+  //     'https://wpdb.mindfulnessapps.com/wp-content/uploads/2019/12/Mjukstarta-dagen-5-min.mp3';
 
-  void changeImage() {
-    setState(() {
-      clickedImg = !clickedImg;
-    });
-  }
+  dynamic ovingarListModel = OvingarListModel(
+      id: '', name: '', images: '', description: '', group: '', url: '');
+  // dynamic practice = PracticeModel1(
+  //     id: '', name: '', images: '', description: '', url: '', group: '');
+
+//   updateSlider({newDuration}) {
+//     setState(() {
+//       duration = newDuration;
+//     });
+//   }
+//
+//   void changeImage() {
+//     setState(() {
+//       clickedImg = !clickedImg;
+//     });
+//   }
+//
+//   bool playing = false;
+//   IconData playBtn = Icons.play_arrow;
+//   late AudioPlayer _player;
+//   late AudioCache cache;
+//
+//   Duration position = new Duration();
+//   Duration musicLength = new Duration();
+//
+//   // chúng ta sẽ tạo một thanh trượt tùy chỉnh
+//   Widget slider() {
+//     return Container(
+//       width: 290.0,
+//       child: Slider.adaptive(
+//           activeColor: Colors.orange,
+//           inactiveColor: Colors.white54,
+//           value: position.inSeconds.toDouble(),
+//           max: musicLength.inSeconds.toDouble(),
+//           onChanged: (value) {
+//             seekToSec(value.toInt());
+//           }),
+//     );
+//   }
+//
+// // hãy tạo hàm tìm kiếm cho phép chúng ta đi đến một vị trí nhất định của bản nhạc
+//   void seekToSec(int sec) {
+//     Duration newPos = Duration(seconds: sec);
+//     _player.seek(newPos);
+//   }
+//
+//   //Bây giờ hãy khởi tạo trình phát của chúng ta
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     _player = AudioPlayer();
+//     cache = AudioCache(fixedPlayer: _player);
+//
+//     // bây giờ hãy xử lý thời gian audioplayer
+//     // hàm này sẽ cho phép bạn lấy thời lượng nhạc
+//
+//     // _player.durationHandler = (d) {
+//     //
+//     // };
+//
+//     _player.onDurationChanged.listen((d) {
+//       setState(() {
+//         musicLength = d;
+//       });
+//     });
+//
+//     // hàm này sẽ cho phép chúng ta di chuyển con trỏ của thanh trượt trong khi chúng ta đang phát bài hát
+//     // _player.positionHandler = (p) {
+//     //
+//     // };
+//
+//     _player.onAudioPositionChanged.listen((p) {
+//       setState(() {
+//         position = p;
+//       });
+//     });
+//   }
+  AudioPlayer audioPlayer = new AudioPlayer();
+
+  Duration duration = new Duration();
+  Duration position = new Duration();
 
   bool playing = false;
-  IconData playBtn = Icons.play_arrow;
-  late AudioPlayer _player;
-  late AudioCache cache;
-
-  Duration position = new Duration();
-  Duration musicLength = new Duration();
-
-  // chúng ta sẽ tạo một thanh trượt tùy chỉnh
-  Widget slider() {
-    return Container(
-      width: 290.0,
-      child: Slider.adaptive(
-          inactiveColor: Colors.white54,
-          value: position.inSeconds.toDouble(),
-          max: musicLength.inSeconds.toDouble(),
-          onChanged: (value) {
-            seekToSec(value.toInt());
-          }),
-    );
-  }
-
-// hãy tạo hàm tìm kiếm cho phép chúng ta đi đến một vị trí nhất định của bản nhạc
-  void seekToSec(int sec) {
-    Duration newPos = Duration(seconds: sec);
-    _player.seek(newPos);
-  }
-
-  //Bây giờ hãy khởi tạo trình phát của chúng ta
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _player = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
-    cache = AudioCache(fixedPlayer: _player);
-
-    // bây giờ hãy xử lý thời gian audioplayer
-    // hàm này sẽ cho phép bạn lấy thời lượng nhạc
-
-    // _player.durationHandler = (d) {
-    //
-    // };
-
-    _player.onDurationChanged.listen((d) {
-      setState(() {
-        musicLength = d;
-      });
-    });
-
-    // hàm này sẽ cho phép chúng ta di chuyển con trỏ của thanh trượt trong khi chúng ta đang phát bài hát
-    // _player.positionHandler = (p) {
-    //
-    // };
-
-    _player.onAudioPositionChanged.listen((p) {
-      setState(() {
-        position = p;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -187,33 +200,43 @@ class _OvningarScreenState extends State<OvningarScreen> {
                                 child: ListTile(
                                   leading: CircleAvatar(
                                     radius: 30,
-                                    backgroundImage: AssetImage(
-                                      ovingarList[index].images,
-                                    ),
+                                    backgroundImage:
+                                        AssetImage(ovingarList[index].images),
                                   ),
                                   title: Text(
-                                    ovingarList[index].title,
+                                    ovingarList[index].name,
                                     style: TextStyle(
                                         color: Color(0xff378591),
                                         fontFamily: 'Roboto-Medium',
                                         fontSize: 18),
                                   ),
                                   subtitle: Text(
-                                    ovingarList[index].subtileText,
+                                    ovingarList[index].description,
                                     style: TextStyle(
                                         color: Color(0xff378591),
                                         fontFamily: 'Roboto-Light',
                                         fontSize: 15),
                                   ),
                                   onTap: () {
+                                    // setState(() {
+                                    //   ovingarListModel = OvingarListModel(
+                                    //       images: ovingarList[index].images,
+                                    //       title: ovingarList[index].title,
+                                    //       subtileText:
+                                    //           ovingarList[index].subtileText);
+                                    // });
+
                                     setState(() {
                                       ovingarListModel = OvingarListModel(
+                                          id: ovingarList[index].id,
+                                          name: ovingarList[index].name,
                                           images: ovingarList[index].images,
-                                          title: ovingarList[index].title,
-                                          subtileText:
-                                              ovingarList[index].subtileText);
+                                          description:
+                                              ovingarList[index].description,
+                                          url: ovingarList[index].url,
+                                          group: ovingarList[index].group);
                                     });
-                                    print(ovingarListModel.title);
+                                    print(ovingarListModel.name);
                                     isClicked = !isClicked;
                                   },
                                 ),
@@ -293,14 +316,14 @@ class _OvningarScreenState extends State<OvningarScreen> {
                                   height: 40,
                                 ),
                                 Text(
-                                  ovingarListModel?.title,
+                                  ovingarListModel?.name,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'Roboto-Light',
                                       fontSize: 26),
                                 ),
                                 Text(
-                                  ovingarListModel?.subtileText,
+                                  ovingarListModel?.description,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'Roboto-Light',
@@ -315,42 +338,74 @@ class _OvningarScreenState extends State<OvningarScreen> {
                                       SizedBox(
                                         height: 0,
                                       ),
+                                      // Container(
+                                      //   width: 500.0,
+                                      //   margin:
+                                      //       EdgeInsets.fromLTRB(20, 0, 0, 0),
+                                      //   child: Column(
+                                      //     mainAxisAlignment:
+                                      //         MainAxisAlignment.center,
+                                      //     crossAxisAlignment:
+                                      //         CrossAxisAlignment.center,
+                                      //     children: [
+                                      //       Row(
+                                      //         children: [
+                                      //           Text(
+                                      //             "${position.inMinutes}:${position.inSeconds.remainder(60)}",
+                                      //             style: TextStyle(
+                                      //                 fontSize: 18.0,
+                                      //                 color: Colors.white),
+                                      //           ),
+                                      //           SizedBox(
+                                      //             width: 260,
+                                      //           ),
+                                      //           Text(
+                                      //             "${musicLength.inMinutes}:${musicLength.inSeconds.remainder(60)}",
+                                      //             style: TextStyle(
+                                      //                 fontSize: 18.0,
+                                      //                 color: Colors.white),
+                                      //           ),
+                                      //         ],
+                                      //       ),
+                                      //       Container(child: slider()),
+                                      //     ],
+                                      //   ),
+                                      // ),
                                       Container(
-                                        width: 500.0,
                                         margin:
                                             EdgeInsets.fromLTRB(20, 0, 0, 0),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
                                           children: [
                                             Row(
                                               children: [
-                                                Text(
-                                                  "${position.inMinutes}:${position.inSeconds.remainder(60)}",
-                                                  style: TextStyle(
-                                                      fontSize: 18.0,
-                                                      color: Colors.white),
+                                                Container(
+                                                  child: Text(
+                                                    "${position.inMinutes}:${position.inSeconds.remainder(60)}",
+                                                    style: TextStyle(
+                                                        fontSize: 18.0,
+                                                        color: Colors.white),
+                                                  ),
                                                 ),
                                                 SizedBox(
-                                                  width: 260,
+                                                  width: 250,
                                                 ),
-                                                Text(
-                                                  "${musicLength.inMinutes}:${musicLength.inSeconds.remainder(60)}",
-                                                  style: TextStyle(
-                                                      fontSize: 18.0,
-                                                      color: Colors.white),
+                                                Container(
+                                                  child: Text(
+                                                    "${duration.inMinutes}:${duration.inSeconds.remainder(60)}",
+                                                    style: TextStyle(
+                                                        fontSize: 18.0,
+                                                        color: Colors.white),
+                                                  ),
                                                 ),
                                               ],
                                             ),
-                                            Container(child: slider()),
+                                            slider(),
                                           ],
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
+
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -362,30 +417,23 @@ class _OvningarScreenState extends State<OvningarScreen> {
                                               onPressed: () {},
                                               icon: Image.asset(
                                                   'assets/images/back15.png')),
-                                          IconButton(
-                                            iconSize: 50,
-                                            color: Colors.white,
-                                            onPressed: () {
-                                              //here we will add the functionality of the play button
-                                              if (!playing) {
-                                                //now let's play the song
-                                                cache.play(
-                                                    "assets/audio/song1.mp3");
-                                                setState(() {
-                                                  playBtn = Icons.pause;
-                                                  playing = true;
-                                                });
-                                              } else {
-                                                _player.pause();
-                                                setState(() {
-                                                  playBtn = Icons.play_arrow;
-                                                  playing = false;
-                                                });
-                                              }
+                                          SizedBox(
+                                            width: 15,
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              getAudio();
                                             },
-                                            icon: Icon(
-                                              playBtn,
+                                            child: Icon(
+                                              playing == false
+                                                  ? Icons.play_arrow_outlined
+                                                  : Icons.pause_circle_outline,
+                                              size: 60,
+                                              color: Colors.white,
                                             ),
+                                          ),
+                                          SizedBox(
+                                            width: 15,
                                           ),
                                           IconButton(
                                               iconSize: 45.0,
@@ -397,6 +445,7 @@ class _OvningarScreenState extends State<OvningarScreen> {
                                       SizedBox(
                                         height: 80,
                                       ),
+
                                       Row(
                                         children: [
                                           Checkbox(
@@ -445,47 +494,30 @@ class _OvningarScreenState extends State<OvningarScreen> {
                               ],
                             )
                           : Container(
-                              child: Row(
-                              children: [
-                                Container(
-                                  child: IconButton(
-                                    iconSize: 40.0,
-                                    color: Colors.white,
-                                    onPressed: () {
-//here we will add the functionality of the play button
-                                      if (!playing) {
-//now let's play the song
-                                        cache.play(
-                                            "assets/audio/assets_note2.wav");
-                                        setState(() {
-                                          playBtn = Icons.pause;
-                                          playing = true;
-                                        });
-                                      } else {
-                                        _player.pause();
-                                        setState(() {
-                                          playBtn = Icons.play_arrow;
-                                          playing = false;
-                                        });
-                                      }
-                                    },
-                                    icon: Icon(
-                                      playBtn,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                              margin: EdgeInsets.only(left: 20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
                                     children: [
+                                      InkWell(
+                                        onTap: () {
+                                          getAudio();
+                                        },
+                                        child: Icon(
+                                          playing == false
+                                              ? Icons.play_arrow_outlined
+                                              : Icons.pause_circle_outline,
+                                          size: 40,
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                       slider(),
                                     ],
                                   ),
-                                ),
-                              ],
-                            )),
+                                ],
+                              ),
+                            ),
                       endDrawer: EndDrawerScreen(),
                     ),
                   ),
@@ -496,5 +528,53 @@ class _OvningarScreenState extends State<OvningarScreen> {
         ),
       ),
     );
+  }
+
+  Widget slider() {
+    return Container(
+      width: 300.0,
+      child: Slider.adaptive(
+          min: 0.0,
+          activeColor: Colors.orange,
+          inactiveColor: Colors.white54,
+          value: position.inSeconds.toDouble(),
+          max: duration.inSeconds.toDouble(),
+          onChanged: (double value) {
+            setState(() {
+              audioPlayer.seek(new Duration(seconds: value.toInt()));
+            });
+          }),
+    );
+  }
+
+  void getAudio() async {
+    var url =
+        'https://wpdb.mindfulnessapps.com/wp-content/uploads/2019/12/Tre-medvetna-andetag.mp3';
+    var url2 = ovingarListModel?.url;
+    if (playing) {
+      var res = await audioPlayer.pause();
+      if (res == 1) {
+        setState(() {
+          playing = false;
+        });
+      }
+    } else {
+      var res = await audioPlayer.play(url2, isLocal: true);
+      if (res == 1) {
+        setState(() {
+          playing = true;
+        });
+      }
+    }
+    audioPlayer.onDurationChanged.listen((Duration dd) {
+      setState(() {
+        duration = dd;
+      });
+    });
+    audioPlayer.onAudioPositionChanged.listen((Duration dd) {
+      setState(() {
+        position = dd;
+      });
+    });
   }
 }

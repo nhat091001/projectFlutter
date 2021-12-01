@@ -7,6 +7,7 @@ import 'package:screen1/data/colors.dart';
 import 'package:screen1/models/onbroading_models.dart';
 import 'package:screen1/models/ovningar_list_model.dart';
 import '../screens/ovningar.dart';
+import '../models/practice_models.dart';
 
 class OnbroadingScreen extends StatefulWidget {
   @override
