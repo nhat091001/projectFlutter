@@ -4,18 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screen1/screens/luutru.dart';
+import 'package:screen1/screens/luutru2.dart';
 import './screens/splash_screen.dart';
 import 'package:screen1/screens/ovningar.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Directory document = await getApplicationDocumentsDirectory();
+  Directory document1 = await getTemporaryDirectory();
   Hive
     ..init(document.path)
-    ..registerAdapter(NoteAdapter());
+    ..registerAdapter(NoteAdapter())
+    ..init(document1.path)
+    ..registerAdapter(PaminAdapter());
+
   await Hive.openBox("friends");
+  await Hive.openBox('myBox');
   runApp(MyApp());
 }
 

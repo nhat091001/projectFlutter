@@ -4,7 +4,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:screen1/models/ovningar_list_model.dart';
 import 'package:screen1/screens/end_drawer_screen.dart';
 import 'luutru.dart';
-import 'package:intl/intl.dart';
 
 class TestData extends StatefulWidget {
   @override
@@ -33,8 +32,6 @@ class _TestDataState extends State<TestData> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    String formattedDate = DateFormat('kk:mm:ss \n EEE d MMM').format(now);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -115,7 +112,11 @@ class _TestDataState extends State<TestData> {
                                   ),
                                   subtitle: Row(
                                     children: [
-                                      Text(formattedDate,
+                                      Text(
+                                          friendsBox!
+                                              .getAt(index)
+                                              .dateTime
+                                              .toString(),
                                           style: TextStyle(
                                               fontFamily: 'Roboto-Light',
                                               fontSize: 12,

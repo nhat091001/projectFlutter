@@ -32,6 +32,7 @@ class OvningarScreen extends StatefulWidget {
 }
 
 class _OvningarScreenState extends State<OvningarScreen> {
+  double _currentSliderValue = 20;
   Box? friendsBox;
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
@@ -72,7 +73,7 @@ class _OvningarScreenState extends State<OvningarScreen> {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    String formattedDate = DateFormat('kk:mm:ss \n EEE d MMM').format(now);
+    String formattedDate = DateFormat('kk:mm:ss \t EEE d MMM').format(now);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
@@ -504,7 +505,8 @@ class _OvningarScreenState extends State<OvningarScreen> {
         onChanged: (double value) {
           setState(() {
             print(position.inSeconds.toDouble());
-            audioPlayer.seek(new Duration(seconds: value.toInt()));
+            audioPlayer.seek(
+                new Duration(seconds: value.toInt().roundToDouble().round()));
             audioPlayer.setReleaseMode(ReleaseMode.LOOP);
             // if (position.inSeconds.toDouble() ==
             //     duration.inSeconds.toDouble()) {}
@@ -570,7 +572,7 @@ class _OvningarScreenState extends State<OvningarScreen> {
             content: Text("Max antal ord: 100"),
             actions: <Widget>[
               Container(
-                height: 100,
+                height: 130,
                 child: Column(
                   children: [
                     TextField(
@@ -584,14 +586,14 @@ class _OvningarScreenState extends State<OvningarScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          InkWell(
+                          FlatButton(
                             child: Text(
                               'AVBRYT',
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontWeight: FontWeight.bold),
                             ),
-                            onTap: () {
+                            onPressed: () {
                               print('Không đồng ý');
                               setState(() {
                                 Navigator.pop(context);
@@ -599,42 +601,29 @@ class _OvningarScreenState extends State<OvningarScreen> {
                             },
                           ),
                           SizedBox(
-                            width: 20,
+                            width: 10,
                           ),
-                          InkWell(
+                          FlatButton(
                             child: Text(
                               'OK',
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontWeight: FontWeight.bold),
                             ),
-                            onTap: () {
+                            onPressed: () {
                               print('Đồng ý');
                               final noteTitle = _noteController.text;
                               final title = ovingarListModel?.name;
-                              final noteTime = 'dd';
-                              // friendsBox.put('note', value);
-                              //
-                              // String? result = friendsBox.get('note');
-                              // print(result);
+
                               var person =
                                   Note(noteTitle, title, DateTime.now());
 
                               friendsBox?.add(person);
 
-                              // friendsBox?.add(person);
-
-                              //print(friendsBox?.keys);
-                              //print(friendsBox?.values);
                               print(friendsBox?.length);
                               print(person.noteTitle);
                               print(person.title);
-                              print('formattedDate');
-                              // friendsBox?.values.forEach((element) {
-                              //   //print(element);
-                              //   print(value);
-                              //   print(person.noteTitle);
-                              // });
+
                               print(friendsBox?.values.length);
                               Navigator.pop(context);
                             },
