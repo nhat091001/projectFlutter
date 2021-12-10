@@ -182,7 +182,7 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
                       child: Column(
                         children: [
                           Text(
-                            widget.ovingarListModel.title,
+                            widget.ovingarListModel.description,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Roboto-Light',
@@ -192,7 +192,7 @@ class _MediaMusicScreenState extends State<MediaMusicScreen> {
                             height: 20,
                           ),
                           Text(
-                            widget.ovingarListModel.subtileText,
+                            widget.ovingarListModel.description,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Roboto-Light',

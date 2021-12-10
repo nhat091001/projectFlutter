@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:screen1/screens/logg_screen.dart';
+import 'package:screen1/screens/testMedia.dart';
 
 import 'end_drawer_screen.dart';
 
@@ -79,7 +80,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             borderSide: BorderSide(color: Colors.white),
                           ),
                           color: Colors.white,
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => TestMedia()));
+                            });
+                          },
                           child: Text(
                             '49 kr / månad',
                             style: TextStyle(
