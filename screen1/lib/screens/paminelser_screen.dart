@@ -21,7 +21,8 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
   Box? friendsBox;
   Box? myBox;
 
-  var pamin1 = Pamin(1, '', '', true);
+  // dynamic pamin2 = Pamin(2, '', '', true);
+  //
 
   late String default_choice = '';
   int default_index = 0;
@@ -106,6 +107,8 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
 
   @override
   Widget build(BuildContext context) {
+    dynamic pamin1 = Pamin(
+        default_index, valueChoose.toString(), valueChoose1.toString(), true);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -394,6 +397,9 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                             var pamin = Pamin(noteIndex, noteChoose!,
                                 noteChoose1!, noteSwitch1);
                             myBox?.add(pamin);
+                            //myBox?.add(pamin2);
+                            //myBox?.add(pamin1);
+                            pamin.save();
                             print(noteIndex);
                             print(noteChoose);
                             print(noteChoose1);

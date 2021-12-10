@@ -38,7 +38,7 @@ class _OvningarScreenState extends State<OvningarScreen> {
   final TextEditingController _noteController = TextEditingController();
   final TextEditingController _titleController = TextEditingController();
   var note = Note('', '', DateTime.now());
-
+  late PlayerState playerState;
   bool checkScreen = true;
   bool isClicked = false;
   bool isClicked1 = true;
@@ -111,7 +111,7 @@ class _OvningarScreenState extends State<OvningarScreen> {
                           gradient: LinearGradient(
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
-                            colors: <Color>[
+                            colors: const <Color>[
                               Color(0xff2B9EB1),
                               Color(0xff41B1C3),
                               Color(0xff86DEEB),
@@ -388,9 +388,11 @@ class _OvningarScreenState extends State<OvningarScreen> {
                                                     print('tiến 15s');
                                                     setState(() {
                                                       audioPlayer.seek(Duration(
-                                                          seconds: position
+                                                          seconds: (position
                                                                   .inSeconds +
-                                                              15));
+                                                              15
+                                                                  .roundToDouble()
+                                                                  .round())));
                                                     });
                                                   },
                                                   icon: ImageIcon(
@@ -507,7 +509,9 @@ class _OvningarScreenState extends State<OvningarScreen> {
             print(position.inSeconds.toDouble());
             audioPlayer.seek(
                 new Duration(seconds: value.toInt().roundToDouble().round()));
+            audioPlayer.setReleaseMode(ReleaseMode.RELEASE);
             audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+
             // if (position.inSeconds.toDouble() ==
             //     duration.inSeconds.toDouble()) {}
             // _showDialog1(context);
@@ -619,7 +623,7 @@ class _OvningarScreenState extends State<OvningarScreen> {
                                   Note(noteTitle, title, DateTime.now());
 
                               friendsBox?.add(person);
-
+                              person.save();
                               print(friendsBox?.length);
                               print(person.noteTitle);
                               print(person.title);
