@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:screen1/screens/end_drawer_screen.dart';
-import '../drawer_screen.dart';
 import '../constants.dart';
 
 class OmHjarnFokusScreen extends StatefulWidget {
+  const OmHjarnFokusScreen({Key? key}) : super(key: key);
+
   @override
   _OmHjarnFokusScreenState createState() => _OmHjarnFokusScreenState();
 }
@@ -54,7 +55,7 @@ class _OmHjarnFokusScreenState extends State<OmHjarnFokusScreen> {
                     height: 10,
                   ),
                   RichText(
-                      text: TextSpan(children: <TextSpan>[
+                      text: TextSpan(children: const <TextSpan>[
                     TextSpan(
                         text:
                             'Johan Bergstad – leg. psykolog, föreläsare och en av Sveriges främsta experter på fokusträning – guidar dig genom övningarna. Läs mer i boken ',
@@ -93,7 +94,7 @@ class _OmHjarnFokusScreenState extends State<OmHjarnFokusScreen> {
                     height: 20,
                   ),
                   RichText(
-                    text: TextSpan(children: <TextSpan>[
+                    text: TextSpan(children: const <TextSpan>[
                       TextSpan(text: 'Lyssna på ', style: kTextStyleOH),
                       TextSpan(text: 'Introduktion ', style: kTextOH),
                       TextSpan(
@@ -120,7 +121,7 @@ class _OmHjarnFokusScreenState extends State<OmHjarnFokusScreen> {
                     height: 20,
                   ),
                   RichText(
-                    text: TextSpan(children: <TextSpan>[
+                    text: TextSpan(children: const <TextSpan>[
                       TextSpan(
                           text: 'Behöver du vila och återhämtning så finns ',
                           style: kTextStyleOH),
@@ -136,7 +137,7 @@ class _OmHjarnFokusScreenState extends State<OmHjarnFokusScreen> {
                     height: 20,
                   ),
                   RichText(
-                    text: TextSpan(children: <TextSpan>[
+                    text: TextSpan(children: const <TextSpan>[
                       TextSpan(
                           text:
                               'Träna bara när det passar utifrån situationen du befinner dig i. Det är till exempel inte lämpligt att öva när du kör bil eller gör något annat som kräver ditt fokus. Om du har fysiska eller psykiska hälsoutmaningar bör du rådfråga en läkare innan du övar. Avstå från stretchrörelserna i',
@@ -152,7 +153,7 @@ class _OmHjarnFokusScreenState extends State<OmHjarnFokusScreen> {
                     height: 20,
                   ),
                   RichText(
-                    text: TextSpan(children: <TextSpan>[
+                    text: TextSpan(children: const <TextSpan>[
                       TextSpan(
                           text:
                               'Hjärnfokus definieras som en icke-dömande uppmärksamhet i nuet. Du kan avsiktligt styra denna uppmärksamhet dit du vill (för mer information, se boken Hjärnfokus sidan 21). Du riktar uppmärksamheten och när den vandrar för du tillbaka den. Tack vare att fokus vandrar får du motståndet som behövs för att lyfta den inre hanteln och träna hjärnan.',
@@ -163,7 +164,7 @@ class _OmHjarnFokusScreenState extends State<OmHjarnFokusScreen> {
                     height: 20,
                   ),
                   RichText(
-                    text: TextSpan(children: <TextSpan>[
+                    text: TextSpan(children: const <TextSpan>[
                       TextSpan(
                           text:
                               'När du har lärt dig en övning kan du själv ställa in tidslängden och öva till ',
@@ -182,7 +183,7 @@ class _OmHjarnFokusScreenState extends State<OmHjarnFokusScreen> {
                     height: 20,
                   ),
                   RichText(
-                    text: TextSpan(children: <TextSpan>[
+                    text: TextSpan(children: const <TextSpan>[
                       TextSpan(text: 'På '),
                       TextSpan(text: 'hjärnfokus.se', style: kTextDecoration),
                       TextSpan(
@@ -195,7 +196,7 @@ class _OmHjarnFokusScreenState extends State<OmHjarnFokusScreen> {
                     height: 20,
                   ),
                   RichText(
-                    text: TextSpan(children: <TextSpan>[
+                    text: TextSpan(children: const <TextSpan>[
                       TextSpan(
                           text: 'Denna app är framtagen av ',
                           style: kTextStyleOH),
@@ -213,7 +214,7 @@ class _OmHjarnFokusScreenState extends State<OmHjarnFokusScreen> {
                     height: 20,
                   ),
                   RichText(
-                    text: TextSpan(children: <TextSpan>[
+                    text: TextSpan(children: const <TextSpan>[
                       TextSpan(
                           text: 'Här kan du läsa om hur vi hanterar ',
                           style: kTextStyleOH),

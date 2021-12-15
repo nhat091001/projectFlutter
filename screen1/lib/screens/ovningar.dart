@@ -5,34 +5,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
-import 'package:screen1/screens/clock2.dart';
 import 'package:screen1/screens/clock_screen.dart';
 import 'package:screen1/screens/luutru.dart';
-import 'package:screen1/screens/media_music_screen.dart';
-import 'package:screen1/screens/seconds_brain.dart';
-import 'package:screen1/screens/testMedia.dart';
 import 'package:screen1/screens/testdata.dart';
 import 'end_drawer_screen.dart';
-import 'meditation_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'omhjarnfokus_screen.dart';
-import 'smakprov_boken_screen.dart';
-import 'paminelser_screen.dart';
-import 'bottom_button_screen.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'min_profil_screen.dart';
-import '../drawer_screen.dart';
 import '../models/ovningar_list_model.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 
 class OvningarScreen extends StatefulWidget {
+  const OvningarScreen({Key? key}) : super(key: key);
+
   @override
   _OvningarScreenState createState() => _OvningarScreenState();
 }
 
 class _OvningarScreenState extends State<OvningarScreen> {
-  double _currentSliderValue = 20;
   Box? friendsBox;
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
@@ -46,8 +36,6 @@ class _OvningarScreenState extends State<OvningarScreen> {
   String? valueLesson;
   bool clickedImg = true;
   bool showitem = false;
-  // String url =
-  //     'https://wpdb.mindfulnessapps.com/wp-content/uploads/2019/12/Mjukstarta-dagen-5-min.mp3';
 
   dynamic ovingarListModel = OvingarListModel(
       id: 1, name: '', images: '', description: '', group: '', url: '');
@@ -351,11 +339,19 @@ class _OvningarScreenState extends State<OvningarScreen> {
                                                   onPressed: () {
                                                     print('về 15s');
                                                     setState(() {
-                                                      audioPlayer.seek(
-                                                          new Duration(
-                                                              seconds: position
-                                                                      .inSeconds -
-                                                                  15));
+                                                      print(position.inSeconds);
+                                                      if (position.inSeconds <=
+                                                          30) {
+                                                        audioPlayer.seek(
+                                                            new Duration(
+                                                                seconds: 0));
+                                                      } else {
+                                                        audioPlayer.seek(
+                                                            new Duration(
+                                                                seconds: position
+                                                                        .inSeconds -
+                                                                    15));
+                                                      }
                                                     });
                                                   },
                                                   color: Colors.white,
@@ -387,12 +383,20 @@ class _OvningarScreenState extends State<OvningarScreen> {
                                                   onPressed: () {
                                                     print('tiến 15s');
                                                     setState(() {
-                                                      audioPlayer.seek(Duration(
-                                                          seconds: (position
-                                                                  .inSeconds +
-                                                              15
-                                                                  .roundToDouble()
-                                                                  .round())));
+                                                      print(duration.inSeconds);
+
+                                                      if (position.inSeconds >=
+                                                          duration.inSeconds -
+                                                              15) {
+                                                        audioPlayer.seek(Duration(
+                                                            seconds: duration
+                                                                .inSeconds));
+                                                      } else {
+                                                        audioPlayer.seek(Duration(
+                                                            seconds: (position
+                                                                    .inSeconds +
+                                                                15)));
+                                                      }
                                                     });
                                                   },
                                                   icon: ImageIcon(
@@ -511,19 +515,15 @@ class _OvningarScreenState extends State<OvningarScreen> {
                 new Duration(seconds: value.toInt().roundToDouble().round()));
             audioPlayer.setReleaseMode(ReleaseMode.RELEASE);
             audioPlayer.setReleaseMode(ReleaseMode.LOOP);
-
-            // if (position.inSeconds.toDouble() ==
-            //     duration.inSeconds.toDouble()) {}
-            // _showDialog1(context);
           });
         },
         onChangeEnd: (double value) {
-          print('ssss');
           setState(() {
             if (position.inSeconds.toDouble() ==
                 duration.inSeconds.toDouble()) {
               _showDialog1(context);
             }
+            print('ssss');
           });
           // setState(() {
           //   if (position.inSeconds.toDouble() ==

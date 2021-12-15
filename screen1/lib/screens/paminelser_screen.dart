@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:screen1/screens/end_drawer_screen.dart';
 import 'package:screen1/screens/luutru2.dart';
+import 'package:screen1/screens/notification.dart';
 import 'package:screen1/screens/testData2.dart';
 import 'package:screen1/screens/test_validate.dart';
 import '../drawer_screen.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class PaminelserScreen extends StatefulWidget {
   @override
@@ -12,6 +14,8 @@ class PaminelserScreen extends StatefulWidget {
 }
 
 class _PaminelserScreenState extends State<PaminelserScreen> {
+  //FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
+
   final _formKey = GlobalKey<FormState>();
   bool isSwitched = true;
   bool isSwitched1 = false;
@@ -101,9 +105,28 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
     // TODO: implement initState
     getFriendsBox();
     selected = 0;
-
+    // var androidIntialize = new AndroidInitializationSettings("light");
+    // var iOSInitialize = new IOSInitializationSettings(
+    //     requestSoundPermission: false,
+    //     requestBadgePermission: false,
+    //     requestAlertPermission: false);
+    // var initializationSettings = new InitializationSettings(
+    //     android: androidIntialize, iOS: iOSInitialize);
+    // flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    // flutterLocalNotificationsPlugin?.initialize(initializationSettings);
     super.initState();
   }
+
+  // Future _showNotification() async {
+  //   var androidDetails = new AndroidNotificationDetails(
+  //       'channelId', 'channelName',
+  //       importance: Importance.high);
+  //   var iosDetails = new IOSNotificationDetails();
+  //   var generalNotificationDetails =
+  //       new NotificationDetails(android: androidDetails, iOS: iosDetails);
+  //   await flutterLocalNotificationsPlugin?.show(0, 'notification title',
+  //       'notification body1', generalNotificationDetails);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -405,23 +428,39 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                             print(noteChoose1);
                             print(noteSwitch1);
                             print("số lượng ${myBox?.length}");
+                            //_showNotification();
                           }
                         : null,
-                    child: Text('SPARA2',
+                    child: Text('SPARA',
                         style: TextStyle(color: Colors.white, fontSize: 18)),
                   ),
                 ),
                 Container(
-                  child: ElevatedButton(
-                    child: Text('check'),
-                    onPressed: () {
-                      setState(() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TestData2()));
-                      });
-                    },
+                  child: Row(
+                    children: [
+                      ElevatedButton(
+                        child: Text('check'),
+                        onPressed: () {
+                          setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TestData2()));
+                          });
+                        },
+                      ),
+                      ElevatedButton(
+                        child: Text('notification 1'),
+                        onPressed: () {
+                          setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TestNotification()));
+                          });
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ],

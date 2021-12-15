@@ -3,6 +3,8 @@ import 'package:screen1/screens/end_drawer_screen.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class SmakprovbokenScreen extends StatefulWidget {
+  const SmakprovbokenScreen({Key? key}) : super(key: key);
+
   @override
   _SmakprovbokenScreenState createState() => _SmakprovbokenScreenState();
 }

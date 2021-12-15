@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:screen1/screens/logg_screen.dart';
-import 'package:screen1/screens/testMedia.dart';
 
 import 'end_drawer_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
+
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
@@ -35,7 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           margin: EdgeInsets.all(15),
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 height: 180,
                 width: 200,
                 child: Image.asset('assets/images/logo_purchase.png'),
@@ -71,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Container(
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                       width: 219,
                       height: 39,
                       child: FlatButton(
@@ -81,12 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           color: Colors.white,
                           onPressed: () {
-                            setState(() {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => TestMedia()));
-                            });
+                            setState(() {});
                           },
                           child: Text(
                             '49 kr / månad',
@@ -99,7 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     SizedBox(
                       height: 15,
                     ),
-                    Container(
+                    SizedBox(
                       width: 219,
                       height: 39,
                       child: FlatButton(
@@ -142,7 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               Container(
                 child: RichText(
-                  text: TextSpan(children: <TextSpan>[
+                  text: TextSpan(children: const <TextSpan>[
                     TextSpan(
                         text:
                             'De första 30 dagarna provar du kostnadsfritt. Därefter förnyas prenumerationen automatiskt om den inte avbryts senast 24 timmar innan en pågående period löper ut (månad eller år). Här kan du läsa mer om ',

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:radio_button_form_field/radio_button_form_field.dart';
+
 class TestValidate extends StatefulWidget {
   const TestValidate({Key? key}) : super(key: key);
 
@@ -17,17 +17,13 @@ class _TestValidateState extends State<TestValidate> {
   String? valueChoose1;
   int? selected;
 
-
-
-  late String default_choice ='';
-   int default_index =0;
+  late String default_choice = '';
+  int default_index = 0;
   List<MyChoice> choices = [
     MyChoice(index: 1, choice: "30m"),
     MyChoice(index: 2, choice: "1h"),
     MyChoice(index: 3, choice: "2h"),
   ];
-
-
 
   /////////
   final items = [
@@ -84,8 +80,6 @@ class _TestValidateState extends State<TestValidate> {
     '24',
   ];
 
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -98,7 +92,6 @@ class _TestValidateState extends State<TestValidate> {
       selected = val;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +110,9 @@ class _TestValidateState extends State<TestValidate> {
                   children: [
                     Text(
                       'Frekvens',
-                      style: TextStyle(color:isSwitched? Colors.black:Colors.grey, fontSize: 16),
+                      style: TextStyle(
+                          color: isSwitched ? Colors.black : Colors.grey,
+                          fontSize: 16),
                     ),
                     SizedBox(
                       width: 30,
@@ -247,11 +242,15 @@ class _TestValidateState extends State<TestValidate> {
             Container(
               width: 300,
               height: 50,
-              color: valueChoose != null && valueChoose1 != null && default_index>=1
+              color: valueChoose != null &&
+                      valueChoose1 != null &&
+                      default_index >= 1
                   ? Colors.cyan
                   : Colors.black,
               child: FlatButton(
-                onPressed: valueChoose != null && valueChoose1 != null && default_index>=1
+                onPressed: valueChoose != null &&
+                        valueChoose1 != null &&
+                        default_index >= 1
                     ? () {
                         setState(() {
                           print(valueChoose);
@@ -271,8 +270,6 @@ class _TestValidateState extends State<TestValidate> {
   }
 }
 
-
-
 class MyChoice {
   late String choice;
   late int index;
@@ -282,4 +279,3 @@ class MyChoice {
     required this.choice,
   });
 }
-

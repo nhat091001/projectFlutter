@@ -1,15 +1,12 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:screen1/constants.dart';
 import 'package:screen1/data/colors.dart';
 import 'package:screen1/models/onbroading_models.dart';
-import 'package:screen1/models/ovningar_list_model.dart';
 import '../screens/ovningar.dart';
-import '../models/practice_models.dart';
 
 class OnbroadingScreen extends StatefulWidget {
+  const OnbroadingScreen({Key? key}) : super(key: key);
+
   @override
   _OnbroadingScreenState createState() => _OnbroadingScreenState();
 }

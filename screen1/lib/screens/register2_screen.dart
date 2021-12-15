@@ -1,11 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:screen1/screens/logg_screen.dart';
 import 'package:screen1/screens/min2.dart';
 
 import 'end_drawer_screen.dart';
 
 class RegisterScreen2 extends StatefulWidget {
+  const RegisterScreen2({Key? key}) : super(key: key);
+
   @override
   _RegisterScreenState2 createState() => _RegisterScreenState2();
 }
@@ -58,14 +59,25 @@ class _RegisterScreenState2 extends State<RegisterScreen2> {
               Container(
                 alignment: Alignment.centerLeft,
                 child: RichText(
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(text: 'Tack för din prenumeration. Du har valt att betala: ',style: TextStyle(fontSize: 16,fontFamily: 'Roboto-Light')),
-                      TextSpan(text: 'Månadsvis',style: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium')),
-                      TextSpan(text: ' Förnyas: ',style: TextStyle(fontSize: 16,fontFamily: 'Roboto-Light')),
-                      TextSpan(text: '6 aug 2021',style: TextStyle(fontSize: 16,fontFamily: 'Roboto-Medium')),
-                    ]
-                  ),
+                  text: TextSpan(children: const <TextSpan>[
+                    TextSpan(
+                        text:
+                            'Tack för din prenumeration. Du har valt att betala: ',
+                        style: TextStyle(
+                            fontSize: 16, fontFamily: 'Roboto-Light')),
+                    TextSpan(
+                        text: 'Månadsvis',
+                        style: TextStyle(
+                            fontSize: 16, fontFamily: 'Roboto-Medium')),
+                    TextSpan(
+                        text: ' Förnyas: ',
+                        style: TextStyle(
+                            fontSize: 16, fontFamily: 'Roboto-Light')),
+                    TextSpan(
+                        text: '6 aug 2021',
+                        style: TextStyle(
+                            fontSize: 16, fontFamily: 'Roboto-Medium')),
+                  ]),
                 ),
               ),
               SizedBox(
@@ -75,9 +87,17 @@ class _RegisterScreenState2 extends State<RegisterScreen2> {
                 child: Column(
                   children: [
                     Container(
-                      child: Text('Vill du byta till årlig betalning?',style: TextStyle(fontFamily: 'Roboto-Light',fontSize: 16,color: Colors.white),),
+                      child: Text(
+                        'Vill du byta till årlig betalning?',
+                        style: TextStyle(
+                            fontFamily: 'Roboto-Light',
+                            fontSize: 16,
+                            color: Colors.white),
+                      ),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Container(
                       width: 219,
                       height: 39,
@@ -100,7 +120,13 @@ class _RegisterScreenState2 extends State<RegisterScreen2> {
                       height: 20,
                     ),
                     Container(
-                      child: Text('Vill du avbryta prenumerationen?',style: TextStyle(fontFamily: 'Roboto-Light',fontSize: 16,color: Colors.white),),
+                      child: Text(
+                        'Vill du avbryta prenumerationen?',
+                        style: TextStyle(
+                            fontFamily: 'Roboto-Light',
+                            fontSize: 16,
+                            color: Colors.white),
+                      ),
                     ),
                     SizedBox(
                       height: 5,
@@ -114,9 +140,7 @@ class _RegisterScreenState2 extends State<RegisterScreen2> {
                             borderSide: BorderSide(color: Colors.white),
                           ),
                           color: Colors.white,
-                          onPressed: () {
-
-                          },
+                          onPressed: () {},
                           child: Text(
                             'Avbryt',
                             style: TextStyle(
@@ -131,25 +155,26 @@ class _RegisterScreenState2 extends State<RegisterScreen2> {
               SizedBox(
                 height: 75,
               ),
-
-
               Container(
                 child: RichText(
                   text: TextSpan(children: <TextSpan>[
                     TextSpan(
                         text:
-                        'De första 30 dagarna provar du kostnadsfritt. Därefter förnyas prenumerationen automatiskt om den inte avbryts senast 24 timmar innan en pågående period löper ut (månad eller år). Här kan du läsa mer om ',
+                            'De första 30 dagarna provar du kostnadsfritt. Därefter förnyas prenumerationen automatiskt om den inte avbryts senast 24 timmar innan en pågående period löper ut (månad eller år). Här kan du läsa mer om ',
                         style: TextStyle(
                           fontSize: 12,
                           fontFamily: 'Roboto-Light',
                         )),
-
                     TextSpan(
-                      recognizer: new TapGestureRecognizer()..onTap=(){
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=>Min2Screen()));
-                      },
+                        recognizer: new TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Min2Screen()));
+                          },
                         text:
-                        'hur du avbryter prenumerationen, användarvillkor och integritetspolicy',
+                            'hur du avbryter prenumerationen, användarvillkor och integritetspolicy',
                         style: TextStyle(
                           fontSize: 12,
                           decoration: TextDecoration.underline,
