@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 import 'package:screen1/screens/end_drawer_screen.dart';
 import 'package:screen1/screens/luutru2.dart';
 import 'package:screen1/screens/notification.dart';
+import 'package:screen1/screens/notification2.dart';
 import 'package:screen1/screens/testData2.dart';
 import 'package:screen1/screens/test_validate.dart';
 import '../drawer_screen.dart';
@@ -14,7 +17,11 @@ class PaminelserScreen extends StatefulWidget {
 }
 
 class _PaminelserScreenState extends State<PaminelserScreen> {
-  //FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
+  FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin =
+      new FlutterLocalNotificationsPlugin();
+  AndroidInitializationSettings? androidInitializationSettings;
+  IOSInitializationSettings? iosInitializationSettings;
+  InitializationSettings? initializationSettings;
 
   final _formKey = GlobalKey<FormState>();
   bool isSwitched = true;
@@ -105,28 +112,115 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
     // TODO: implement initState
     getFriendsBox();
     selected = 0;
-    // var androidIntialize = new AndroidInitializationSettings("light");
-    // var iOSInitialize = new IOSInitializationSettings(
-    //     requestSoundPermission: false,
-    //     requestBadgePermission: false,
-    //     requestAlertPermission: false);
-    // var initializationSettings = new InitializationSettings(
-    //     android: androidIntialize, iOS: iOSInitialize);
-    // flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
-    // flutterLocalNotificationsPlugin?.initialize(initializationSettings);
     super.initState();
+    intitializing();
   }
 
-  // Future _showNotification() async {
-  //   var androidDetails = new AndroidNotificationDetails(
-  //       'channelId', 'channelName',
-  //       importance: Importance.high);
-  //   var iosDetails = new IOSNotificationDetails();
-  //   var generalNotificationDetails =
-  //       new NotificationDetails(android: androidDetails, iOS: iosDetails);
-  //   await flutterLocalNotificationsPlugin?.show(0, 'notification title',
-  //       'notification body1', generalNotificationDetails);
-  // }
+  void intitializing() async {
+    androidInitializationSettings = AndroidInitializationSettings('light');
+    iosInitializationSettings = IOSInitializationSettings();
+    initializationSettings = InitializationSettings(
+        android: androidInitializationSettings, iOS: iosInitializationSettings);
+    await flutterLocalNotificationsPlugin?.initialize(initializationSettings!);
+  }
+
+  void _showNotificationDuration() async {
+    await notificationDuration();
+  }
+
+  Future<void> notificationDuration() async {
+    AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails('channelId', 'channelName',
+            priority: Priority.high,
+            importance: Importance.max,
+            ticker: 'test');
+    IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
+    NotificationDetails notificationDetails = NotificationDetails(
+        android: androidNotificationDetails, iOS: iosNotificationDetails);
+    // for (int i = 0; i<2; i++) {
+    //   if (i == 1) {
+    //     setState(() {
+    //       timeDuration = DateTime.now().add(Duration(seconds: 30));
+    //     });
+    //   }
+    //   await flutterLocalNotificationsPlugin?.schedule(i, this.default_choice,
+    //       'Nội dung ${timeDuration}}', timeDuration, notificationDetails);
+    // }
+
+    var timeDuration = DateTime.now().add(Duration(seconds: 30));
+
+    if (default_choice == '30m') {
+      setState(() {
+        var time1 = int.parse(valueChoose!);
+        var time2 = int.parse(valueChoose!);
+        var result = time1 + 1 / 2;
+        var timeDuration = DateTime.now().add(Duration(seconds: 30));
+        String formattedDate = DateFormat('kk ').format(timeDuration);
+        print(formattedDate);
+        print(result);
+      });
+      await flutterLocalNotificationsPlugin?.schedule(
+          1,
+          this.default_choice,
+          'Nội dung ${valueChoose} ${valueChoose1}',
+          timeDuration,
+          notificationDetails);
+    } else if (default_choice == '1h') {
+      setState(() {
+        var time1 = int.parse(valueChoose!);
+        var time2 = int.parse(valueChoose!);
+        var result = time1 + 1;
+        timeDuration = DateTime.now().add(Duration(seconds: 60));
+        String formattedDate = DateFormat('kk ').format(timeDuration);
+        print(formattedDate);
+        print(result);
+      });
+      await flutterLocalNotificationsPlugin?.schedule(
+          1,
+          this.default_choice,
+          'Nội dung ${valueChoose} ${valueChoose1}}',
+          timeDuration,
+          notificationDetails);
+    } else if (default_choice == '2h') {
+      setState(() {
+        var time1 = int.parse(valueChoose!);
+        var time2 = int.parse(valueChoose!);
+        var result = time1 + 2;
+        timeDuration = DateTime.now().add(Duration(seconds: 120));
+        String formattedDate = DateFormat('kk ').format(timeDuration);
+        print(formattedDate);
+        print(result);
+      });
+      await flutterLocalNotificationsPlugin?.schedule(
+          1,
+          this.default_choice,
+          'Nội dung ${valueChoose} ${valueChoose1}}',
+          timeDuration,
+          notificationDetails);
+    }
+  }
+
+  Future onSelectNotification(String payLoad) async {
+    if (payLoad != null) {
+      print(payLoad);
+    }
+  }
+
+  Future onDidReceiveLocalNotification(
+      int id, String title, String body, String payLoad) async {
+    return CupertinoAlertDialog(
+      title: Text(title),
+      content: Text(body),
+      actions: [
+        CupertinoDialogAction(
+            isDefaultAction: true,
+            onPressed: () {
+              print('');
+            },
+            child: Text('ok')),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -428,7 +522,8 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                             print(noteChoose1);
                             print(noteSwitch1);
                             print("số lượng ${myBox?.length}");
-                            //_showNotification();
+
+                            _showNotificationDuration();
                           }
                         : null,
                     child: Text('SPARA',
@@ -449,17 +544,32 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                           });
                         },
                       ),
-                      ElevatedButton(
-                        child: Text('notification 1'),
-                        onPressed: () {
-                          setState(() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => TestNotification()));
-                          });
-                        },
+                      SizedBox(
+                        width: 100,
                       ),
+                      Text('')
+                      // ElevatedButton(
+                      //   child: Text('notification 1'),
+                      //   onPressed: () {
+                      //     setState(() {
+                      //       Navigator.push(
+                      //           context,
+                      //           MaterialPageRoute(
+                      //               builder: (context) => TestNotification()));
+                      //     });
+                      //   },
+                      // ),
+                      // ElevatedButton(
+                      //   child: Text('notification 2'),
+                      //   onPressed: () {
+                      //     setState(() {
+                      //       Navigator.push(
+                      //           context,
+                      //           MaterialPageRoute(
+                      //               builder: (context) => TestNotufication2()));
+                      //     });
+                      //   },
+                      // ),
                     ],
                   ),
                 ),
