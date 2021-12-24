@@ -7,11 +7,14 @@ import 'package:screen1/screens/luutru2.dart';
 import './screens/splash_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Directory document = await getApplicationDocumentsDirectory();
   Directory document1 = await getTemporaryDirectory();
+  tz.initializeTimeZones();
   Hive
     ..init(document.path)
     ..registerAdapter(NoteAdapter())

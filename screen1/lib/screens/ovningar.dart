@@ -518,13 +518,15 @@ class _OvningarScreenState extends State<OvningarScreen> {
           });
         },
         onChangeEnd: (double value) {
-          setState(() {
-            if (position.inSeconds.toDouble() ==
-                duration.inSeconds.toDouble()) {
-              _showDialog1(context);
-            }
-            print('ssss');
-          });
+          checkedLesson
+              ? setState(() {
+                  if (position.inSeconds.toDouble() ==
+                      duration.inSeconds.toDouble()) {
+                    _showDialog1(context);
+                  }
+                  print('ssss');
+                })
+              : null;
           // setState(() {
           //   if (position.inSeconds.toDouble() ==
           //       duration.inSeconds.toDouble()) {}

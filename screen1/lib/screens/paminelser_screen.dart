@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -10,6 +12,8 @@ import 'package:screen1/screens/testData2.dart';
 import 'package:screen1/screens/test_validate.dart';
 import '../drawer_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class PaminelserScreen extends StatefulWidget {
   @override
@@ -97,6 +101,14 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
     '24',
   ];
 
+  List<int> _testItem = [];
+
+  void _addIteam() {
+    setState(() {
+      _testItem.add(1);
+    });
+  }
+
   setSelectedRadio(int val) {
     setState(() {
       selected = val;
@@ -129,6 +141,7 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
   }
 
   Future<void> notificationDuration() async {
+    print('aaaaaaaaaaaaaa');
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails('channelId', 'channelName',
             priority: Priority.high,
@@ -137,64 +150,79 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
     IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
     NotificationDetails notificationDetails = NotificationDetails(
         android: androidNotificationDetails, iOS: iosNotificationDetails);
-    // for (int i = 0; i<2; i++) {
-    //   if (i == 1) {
-    //     setState(() {
-    //       timeDuration = DateTime.now().add(Duration(seconds: 30));
-    //     });
-    //   }
-    //   await flutterLocalNotificationsPlugin?.schedule(i, this.default_choice,
-    //       'Nội dung ${timeDuration}}', timeDuration, notificationDetails);
-    // }
 
     var timeDuration = DateTime.now().add(Duration(seconds: 30));
+    var time1 = int.parse(valueChoose!);
+    var time2 = int.parse(valueChoose1!);
 
-    if (default_choice == '30m') {
-      setState(() {
-        var time1 = int.parse(valueChoose!);
-        var time2 = int.parse(valueChoose!);
-        var result = time1 + 1 / 2;
-        var timeDuration = DateTime.now().add(Duration(seconds: 30));
-        String formattedDate = DateFormat('kk ').format(timeDuration);
-        print(formattedDate);
-        print(result);
-      });
+    int idShow = 1;
+
+    var result = time1;
+    int secondtest = 60;
+    while (result < time2 && default_choice == '1h') {
+      result++;
+      secondtest = secondtest + 60;
+      idShow++;
+      print('kq ${result}');
+      print(secondtest);
+
+      var timeDuration = DateTime.now().add(Duration(seconds: secondtest));
+      String formattedDate = DateFormat('kk:mm').format(timeDuration);
+      print('giờ hiện tại là : ${formattedDate}');
+
       await flutterLocalNotificationsPlugin?.schedule(
-          1,
+          idShow,
           this.default_choice,
-          'Nội dung ${valueChoose} ${valueChoose1}',
+          'Nội dung sau 1h ${valueChoose} ${valueChoose1}',
           timeDuration,
           notificationDetails);
-    } else if (default_choice == '1h') {
-      setState(() {
-        var time1 = int.parse(valueChoose!);
-        var time2 = int.parse(valueChoose!);
-        var result = time1 + 1;
-        timeDuration = DateTime.now().add(Duration(seconds: 60));
-        String formattedDate = DateFormat('kk ').format(timeDuration);
-        print(formattedDate);
-        print(result);
-      });
+    }
+
+    /////////////////////////////////////////////////////////
+
+    var time3 = int.parse(valueChoose!);
+    var time4 = int.parse(valueChoose1!);
+    var result1 = time3;
+    int secondtest1 = 120;
+    int idShow1 = 2;
+    while (result1 < time4 && default_choice == '2h') {
+      result1 += 2;
+      secondtest1 = secondtest1 + 120;
+      idShow1++;
+      print('kq1 ${result1}');
+      print(secondtest1);
+      var timeDuration = DateTime.now().add(Duration(seconds: secondtest1));
+      String formattedDate = DateFormat('kk:mm').format(timeDuration);
+      print('giờ hiện tại là : ${formattedDate}');
+
       await flutterLocalNotificationsPlugin?.schedule(
-          1,
+          idShow1,
           this.default_choice,
-          'Nội dung ${valueChoose} ${valueChoose1}}',
+          'Nội dung sau 2h ${valueChoose} ${valueChoose1}',
           timeDuration,
           notificationDetails);
-    } else if (default_choice == '2h') {
-      setState(() {
-        var time1 = int.parse(valueChoose!);
-        var time2 = int.parse(valueChoose!);
-        var result = time1 + 2;
-        timeDuration = DateTime.now().add(Duration(seconds: 120));
-        String formattedDate = DateFormat('kk ').format(timeDuration);
-        print(formattedDate);
-        print(result);
-      });
+    }
+
+    //-------------------------------------------------------------------------------
+    var time5 = double.parse(valueChoose!);
+    var time6 = double.parse(valueChoose1!);
+    var result2 = time5;
+    int secondtest2 = 30;
+    int idShow2 = 3;
+    while (result2 < time6 && default_choice == '30m') {
+      result2 += 1 / 2;
+      secondtest2 = secondtest2 + 30;
+      idShow2++;
+      print('kq3 ${result2}');
+      print(secondtest2);
+      var timeDuration = DateTime.now().add(Duration(seconds: secondtest2));
+      String formattedDate = DateFormat('kk:mm').format(timeDuration);
+      print('giờ hiện tại là : ${formattedDate}');
+
       await flutterLocalNotificationsPlugin?.schedule(
-          1,
+          idShow2,
           this.default_choice,
-          'Nội dung ${valueChoose} ${valueChoose1}}',
+          'Nội dung sau 30m ${valueChoose} ${valueChoose1}',
           timeDuration,
           notificationDetails);
     }
@@ -224,8 +252,6 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic pamin1 = Pamin(
-        default_index, valueChoose.toString(), valueChoose1.toString(), true);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -524,6 +550,13 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                             print("số lượng ${myBox?.length}");
 
                             _showNotificationDuration();
+
+                            if (_formKey.currentState!.validate()) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      backgroundColor: Colors.blue,
+                                      content: Text('Processing Data')));
+                            }
                           }
                         : null,
                     child: Text('SPARA',
@@ -548,28 +581,6 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                         width: 100,
                       ),
                       Text('')
-                      // ElevatedButton(
-                      //   child: Text('notification 1'),
-                      //   onPressed: () {
-                      //     setState(() {
-                      //       Navigator.push(
-                      //           context,
-                      //           MaterialPageRoute(
-                      //               builder: (context) => TestNotification()));
-                      //     });
-                      //   },
-                      // ),
-                      // ElevatedButton(
-                      //   child: Text('notification 2'),
-                      //   onPressed: () {
-                      //     setState(() {
-                      //       Navigator.push(
-                      //           context,
-                      //           MaterialPageRoute(
-                      //               builder: (context) => TestNotufication2()));
-                      //     });
-                      //   },
-                      // ),
                     ],
                   ),
                 ),

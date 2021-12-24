@@ -54,6 +54,7 @@ dependencies:
   hive_flutter: ^1.1.0
   intl: ^0.17.0
   flutter_local_notifications: ^9.1.5
+  timezone: ^0.8.0
 
 dev_dependencies:
   hive_generator: ^1.1.1
