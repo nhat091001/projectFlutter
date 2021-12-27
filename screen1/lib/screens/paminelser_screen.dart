@@ -29,12 +29,13 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
 
   final _formKey = GlobalKey<FormState>();
   bool isSwitched = true;
-  bool isSwitched1 = false;
-  String? valueChoose;
+  bool isSwitched1 = true;
   String? valueChoose1;
   int? selected;
   Box? friendsBox;
   Box? myBox;
+
+  String? valueChoose;
 
   // dynamic pamin2 = Pamin(2, '', '', true);
   //
@@ -47,7 +48,7 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
     MyChoice(index: 3, choice: "2h"),
   ];
 
-  final items = [
+  var items = <dynamic>[
     '1',
     '2',
     '3',
@@ -74,7 +75,7 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
     '24',
   ];
 
-  final items1 = [
+  var items1 = <dynamic>[
     '1',
     '2',
     '3',
@@ -141,7 +142,6 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
   }
 
   Future<void> notificationDuration() async {
-    print('aaaaaaaaaaaaaa');
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails('channelId', 'channelName',
             priority: Priority.high,
@@ -155,27 +155,31 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
     var time1 = int.parse(valueChoose!);
     var time2 = int.parse(valueChoose1!);
 
+    void abc() {}
     int idShow = 1;
-
     var result = time1;
     int secondtest = 60;
-    while (result < time2 && default_choice == '1h') {
-      result++;
-      secondtest = secondtest + 60;
-      idShow++;
-      print('kq ${result}');
-      print(secondtest);
+    if (result < time2) {
+      while (result < time2 && default_choice == '1h') {
+        result++;
+        secondtest = secondtest + 60;
+        idShow++;
+        print('kq ${result}');
+        print(secondtest);
 
-      var timeDuration = DateTime.now().add(Duration(seconds: secondtest));
-      String formattedDate = DateFormat('kk:mm').format(timeDuration);
-      print('giờ hiện tại là : ${formattedDate}');
+        var timeDuration = DateTime.now().add(Duration(seconds: secondtest));
+        String formattedDate = DateFormat('kk:mm').format(timeDuration);
+        print('giờ hiện tại là : ${formattedDate}');
 
-      await flutterLocalNotificationsPlugin?.schedule(
-          idShow,
-          this.default_choice,
-          'Nội dung sau 1h ${valueChoose} ${valueChoose1}',
-          timeDuration,
-          notificationDetails);
+        await flutterLocalNotificationsPlugin?.schedule(
+            idShow,
+            this.default_choice,
+            'Nội dung sau 1h ${valueChoose} ${valueChoose1}',
+            timeDuration,
+            notificationDetails);
+      }
+    } else if (result > time2) {
+      _showDialog1(context);
     }
 
     /////////////////////////////////////////////////////////
@@ -185,46 +189,55 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
     var result1 = time3;
     int secondtest1 = 120;
     int idShow1 = 2;
-    while (result1 < time4 && default_choice == '2h') {
-      result1 += 2;
-      secondtest1 = secondtest1 + 120;
-      idShow1++;
-      print('kq1 ${result1}');
-      print(secondtest1);
-      var timeDuration = DateTime.now().add(Duration(seconds: secondtest1));
-      String formattedDate = DateFormat('kk:mm').format(timeDuration);
-      print('giờ hiện tại là : ${formattedDate}');
+    if (result1 < time4) {
+      while (result1 < time4 && default_choice == '2h') {
+        result1 += 2;
+        secondtest1 = secondtest1 + 120;
+        idShow1++;
+        print('kq1 ${result1}');
+        print(secondtest1);
+        var timeDuration = DateTime.now().add(Duration(seconds: secondtest1));
+        String formattedDate = DateFormat('kk:mm').format(timeDuration);
+        print('giờ hiện tại là : ${formattedDate}');
 
-      await flutterLocalNotificationsPlugin?.schedule(
-          idShow1,
-          this.default_choice,
-          'Nội dung sau 2h ${valueChoose} ${valueChoose1}',
-          timeDuration,
-          notificationDetails);
+        await flutterLocalNotificationsPlugin?.schedule(
+            idShow1,
+            this.default_choice,
+            'Nội dung sau 2h ${valueChoose} ${valueChoose1}',
+            timeDuration,
+            notificationDetails);
+      }
+    } else if (result1 > time4) {
+      _showDialog1(context);
     }
 
     //-------------------------------------------------------------------------------
+
     var time5 = double.parse(valueChoose!);
     var time6 = double.parse(valueChoose1!);
     var result2 = time5;
     int secondtest2 = 30;
     int idShow2 = 3;
-    while (result2 < time6 && default_choice == '30m') {
-      result2 += 1 / 2;
-      secondtest2 = secondtest2 + 30;
-      idShow2++;
-      print('kq3 ${result2}');
-      print(secondtest2);
-      var timeDuration = DateTime.now().add(Duration(seconds: secondtest2));
-      String formattedDate = DateFormat('kk:mm').format(timeDuration);
-      print('giờ hiện tại là : ${formattedDate}');
+    if (result2 < time6) {
+      while (result2 < time6 && default_choice == '30m') {
+        result2 += 1 / 2;
+        secondtest2 = secondtest2 + 30;
+        idShow2++;
+        print('kq3 ${result2}');
+        print(secondtest2);
+        var timeDuration = DateTime.now().add(Duration(seconds: secondtest2));
+        String formattedDate = DateFormat('kk:mm').format(timeDuration);
+        print('giờ hiện tại là : ${formattedDate}');
 
-      await flutterLocalNotificationsPlugin?.schedule(
-          idShow2,
-          this.default_choice,
-          'Nội dung sau 30m ${valueChoose} ${valueChoose1}',
-          timeDuration,
-          notificationDetails);
+        await flutterLocalNotificationsPlugin?.schedule(
+            idShow2,
+            this.default_choice,
+            'Nội dung sau 30m ${valueChoose} ${valueChoose1}',
+            timeDuration,
+            notificationDetails);
+      }
+    } else if (result2 > time6) {
+      _showDialog1(context);
     }
   }
 
@@ -303,7 +316,7 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                  margin: EdgeInsets.fromLTRB(25, 0, 0, 0),
                   child: Column(
                     children: [
                       Row(
@@ -361,7 +374,7 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                         height: 40,
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                        margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Row(
                           children: [
                             Container(
@@ -416,7 +429,7 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                               ),
                             ),
                             SizedBox(
-                              width: 80,
+                              width: 110,
                             ),
                             Container(
                               child: Column(
@@ -473,7 +486,7 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                         height: 40,
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                        margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Row(
                           children: [
                             Text(
@@ -526,12 +539,10 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                     color: Color(0xff3EAFC1),
                     onPressed: valueChoose != null &&
                             valueChoose1 != null &&
-                            default_index >= 1
+                            default_index >= 1 &&
+                            valueChoose != valueChoose1 &&
+                            valueChoose != valueChoose1
                         ? () {
-                            // print(valueChoose);
-                            // print(valueChoose1);
-                            // print(default_index);
-
                             final noteIndex = default_index;
                             final noteChoose = valueChoose;
                             final noteChoose1 = valueChoose1;
@@ -549,13 +560,14 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
                             print(noteSwitch1);
                             print("số lượng ${myBox?.length}");
 
-                            _showNotificationDuration();
+                            if (_formKey.currentState!.validate() &&
+                                isSwitched1) {
+                              _showNotificationDuration();
 
-                            if (_formKey.currentState!.validate()) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                       backgroundColor: Colors.blue,
-                                      content: Text('Processing Data')));
+                                      content: Text('Lưu thành công')));
                             }
                           }
                         : null,
@@ -590,6 +602,20 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
         )),
       ),
       endDrawer: EndDrawerScreen(),
+    );
+  }
+
+  void _showDialog1(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          child: AlertDialog(
+            title: Text("Lời nhắc"),
+            content: Text("Nhập sai, vui lòng nhập lại"),
+          ),
+        );
+      },
     );
   }
 }
