@@ -123,83 +123,88 @@ class _OvningarScreenState extends State<OvningarScreen> {
                       ),
                     ),
                     body: SafeArea(
-                      child: ListView.builder(
-                        itemBuilder: (BuildContext context, index) {
-                          return Container(
-                            margin: EdgeInsets.fromLTRB(10, 0, 10, 5),
-                            height: 85,
-                            width: 340,
-                            child: Card(
-                              borderOnForeground: false,
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              color: Color(0xffEAF4F5),
-                              child: Container(
-                                margin: EdgeInsets.fromLTRB(10, 3, 20, 0),
-                                child: ListTile(
-                                  leading: CircleAvatar(
-                                    radius: 30,
-                                    backgroundImage:
-                                        AssetImage(ovingarList[index].images),
-                                  ),
-                                  title: Text(
-                                    ovingarList[index].name,
-                                    style: TextStyle(
-                                        color: Color(0xff378591),
-                                        fontFamily: 'Roboto-Medium',
-                                        fontSize: 18),
-                                  ),
-                                  subtitle: Text(
-                                    ovingarList[index].description,
-                                    style: TextStyle(
-                                        color: Color(0xff378591),
-                                        fontFamily: 'Roboto-Light',
-                                        fontSize: 15),
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      showitem = true;
-                                    });
-                                    // setState(() {
-                                    //   ovingarListModel = OvingarListModel(
-                                    //       images: ovingarList[index].images,
-                                    //       title: ovingarList[index].title,
-                                    //       subtileText:
-                                    //           ovingarList[index].subtileText);
-                                    // });
+                      child: Container(
+                        margin: showitem
+                            ? EdgeInsets.only(bottom: 100)
+                            : EdgeInsets.only(bottom: 0),
+                        child: ListView.builder(
+                          itemBuilder: (BuildContext context, index) {
+                            return Container(
+                              margin: EdgeInsets.fromLTRB(10, 0, 10, 5),
+                              height: 85,
+                              width: 340,
+                              child: Card(
+                                borderOnForeground: false,
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                color: Color(0xffEAF4F5),
+                                child: Container(
+                                  margin: EdgeInsets.fromLTRB(10, 3, 20, 0),
+                                  child: ListTile(
+                                    leading: CircleAvatar(
+                                      radius: 30,
+                                      backgroundImage:
+                                          AssetImage(ovingarList[index].images),
+                                    ),
+                                    title: Text(
+                                      ovingarList[index].name,
+                                      style: TextStyle(
+                                          color: Color(0xff378591),
+                                          fontFamily: 'Roboto-Medium',
+                                          fontSize: 18),
+                                    ),
+                                    subtitle: Text(
+                                      ovingarList[index].description,
+                                      style: TextStyle(
+                                          color: Color(0xff378591),
+                                          fontFamily: 'Roboto-Light',
+                                          fontSize: 15),
+                                    ),
+                                    onTap: () {
+                                      setState(() {
+                                        showitem = true;
+                                      });
+                                      // setState(() {
+                                      //   ovingarListModel = OvingarListModel(
+                                      //       images: ovingarList[index].images,
+                                      //       title: ovingarList[index].title,
+                                      //       subtileText:
+                                      //           ovingarList[index].subtileText);
+                                      // });
 
-                                    setState(() {
-                                      ovingarListModel = OvingarListModel(
-                                          id: ovingarList[index].id,
-                                          name: ovingarList[index].name,
-                                          images: ovingarList[index].images,
-                                          description:
-                                              ovingarList[index].description,
-                                          url: ovingarList[index].url,
-                                          group: ovingarList[index].group);
+                                      setState(() {
+                                        ovingarListModel = OvingarListModel(
+                                            id: ovingarList[index].id,
+                                            name: ovingarList[index].name,
+                                            images: ovingarList[index].images,
+                                            description:
+                                                ovingarList[index].description,
+                                            url: ovingarList[index].url,
+                                            group: ovingarList[index].group);
 
-                                      if (ovingarListModel?.id == 21) {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ClockScreen()));
-                                      }
-                                    });
-                                    print(ovingarListModel.name);
-                                    isClicked = !isClicked;
-                                  },
+                                        if (ovingarListModel?.id == 21) {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ClockScreen()));
+                                        }
+                                      });
+                                      print(ovingarListModel.name);
+                                      isClicked = !isClicked;
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                        itemCount: ovingarList.length,
-                        shrinkWrap: true,
+                            );
+                          },
+                          itemCount: ovingarList.length,
+                          shrinkWrap: true,
 //padding: EdgeInsets.all(10),
-                        scrollDirection: Axis.vertical,
+                          scrollDirection: Axis.vertical,
+                        ),
                       ),
                     ),
                     endDrawer: EndDrawerScreen()),

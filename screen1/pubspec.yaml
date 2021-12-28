@@ -55,6 +55,7 @@ dependencies:
   intl: ^0.17.0
   flutter_local_notifications: ^9.1.5
   timezone: ^0.8.0
+  flutter_ringtone_player: ^3.1.1
 
 dev_dependencies:
   hive_generator: ^1.1.1

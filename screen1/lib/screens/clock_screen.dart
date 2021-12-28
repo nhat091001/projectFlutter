@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:screen1/screens/end_drawer_screen.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
@@ -7,13 +8,12 @@ import 'ovningar.dart';
 import 'seconds_brain.dart';
 
 class ClockScreen extends StatefulWidget {
-
-
   @override
   _ClockScreenState createState() => _ClockScreenState();
 }
 
-class _ClockScreenState extends State<ClockScreen> with TickerProviderStateMixin {
+class _ClockScreenState extends State<ClockScreen>
+    with TickerProviderStateMixin {
   late AnimationController controller;
   String? valueMinutes;
   final items = ['1 min', '2 min', '3 min', '4 min'];
@@ -36,50 +36,69 @@ class _ClockScreenState extends State<ClockScreen> with TickerProviderStateMixin
       selected = val;
     });
   }
-   int second=600;
 
+  int second = 600;
+  int second0 = 60;
+  int second1 = 120;
+  int second2 = 180;
+  int second3 = 240;
+  int seconds1 = 0;
   String get timerString {
     Duration duration = controller.duration! * controller.value;
     return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
-  void changeSecond(){
-    setState(() {
-      if(isSwitched && valueMinutes=='1 min'){
-        print(second);
-        print(valueMinutes);
-        setState(() {
-          second=60;
-          controller.duration = Duration(seconds: second);
-        });
 
-        // controller.duration = const Duration(seconds: 30);
-      }
-      else if(isSwitched && valueMinutes=='2 min'){
+  void changeSecond() {
+    setState(() {
+      if (isSwitched && valueMinutes == '1 min') {
         setState(() {
-          second=120;
-          controller.duration = Duration(seconds: second);
+          while (seconds1 < second) {
+            seconds1 = seconds1 + 60;
+            Future.delayed(Duration(seconds: seconds1), () {
+              _showDialog1(context);
+              FlutterRingtonePlayer.playNotification();
+            });
+            print(seconds1);
+          }
         });
-      }
-      else if(isSwitched && valueMinutes=='3 min'){
+      } else if (isSwitched && valueMinutes == '2 min') {
         setState(() {
-          second=180;
-          controller.duration = Duration(seconds: second);
+          while (seconds1 < second) {
+            seconds1 = seconds1 + 120;
+            Future.delayed(Duration(seconds: seconds1), () {
+              _showDialog1(context);
+              FlutterRingtonePlayer.playNotification();
+            });
+            print(seconds1);
+          }
         });
-      }
-      else if(isSwitched && valueMinutes=='4 min'){
+      } else if (isSwitched && valueMinutes == '3 min') {
         setState(() {
-          second=240;
-          controller.duration = Duration(seconds: second);
+          while (seconds1 < second) {
+            seconds1 = seconds1 + 180;
+            Future.delayed(Duration(seconds: seconds1), () {
+              _showDialog1(context);
+            });
+            print(seconds1);
+          }
         });
-      }
-      else if(!isSwitched){
+      } else if (isSwitched && valueMinutes == '4 min') {
         setState(() {
-          second=600;
+          while (seconds1 < second) {
+            seconds1 = seconds1 + 240;
+            Future.delayed(Duration(seconds: seconds1), () {
+              _showDialog1(context);
+            });
+            print(seconds1);
+          }
+        });
+      } else if (!isSwitched) {
+        setState(() {
+          second = 600;
           controller.duration = Duration(seconds: second);
         });
       }
     });
-
   }
 
   @override
@@ -159,8 +178,6 @@ class _ClockScreenState extends State<ClockScreen> with TickerProviderStateMixin
                 ],
               ),
             ),
-
-
             Container(
               margin: EdgeInsets.fromLTRB(0, 80, 0, 0),
               width: 120,
@@ -201,8 +218,6 @@ class _ClockScreenState extends State<ClockScreen> with TickerProviderStateMixin
                 },
               ),
             ),
-
-
             Container(
               margin: EdgeInsets.fromLTRB(0, 60, 0, 0),
               width: 250,
@@ -215,8 +230,13 @@ class _ClockScreenState extends State<ClockScreen> with TickerProviderStateMixin
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Klockor varje: ',style: TextStyle(color: Colors.white70),),
-                  SizedBox(width: 10,),
+                  Text(
+                    'Klockor varje: ',
+                    style: TextStyle(color: Colors.white70),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Container(
                     child: DropdownButton(
                       hint: Text(items.first),
@@ -231,14 +251,18 @@ class _ClockScreenState extends State<ClockScreen> with TickerProviderStateMixin
                       },
                       items: items.map((valueMinutes) {
                         return DropdownMenuItem(
-
                           value: valueMinutes,
-                          child: Text(valueMinutes,style: TextStyle(color: Colors.black),),
+                          child: Text(
+                            valueMinutes,
+                            style: TextStyle(color: Colors.black),
+                          ),
                         );
                       }).toList(),
                     ),
                   ),
-                  SizedBox(width: 10,),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Switch(
                     value: isSwitched,
                     onChanged: (value) {
@@ -248,13 +272,11 @@ class _ClockScreenState extends State<ClockScreen> with TickerProviderStateMixin
                         isSwitched = value;
                         changeSecond();
                         print('số giây  ${this.second}');
-
                       });
                     },
                     activeTrackColor: Colors.pink,
                     activeColor: Colors.grey,
                   )
-
                 ],
               ),
             ),
@@ -262,6 +284,20 @@ class _ClockScreenState extends State<ClockScreen> with TickerProviderStateMixin
         ),
       ),
       endDrawer: EndDrawerScreen(),
+    );
+  }
+
+  void _showDialog1(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          child: AlertDialog(
+            title: Text("Lời nhắc"),
+            content: Text("Time"),
+          ),
+        );
+      },
     );
   }
 }
@@ -299,4 +335,3 @@ class TimerPainter extends CustomPainter {
         backgroundColor != old.backgroundColor;
   }
 }
-
