@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -180,7 +179,7 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
             notificationDetails);
       }
     } else if (result > time2) {
-      _showDialog1(context);
+      _showDialog(context);
     }
 
     /////////////////////////////////////////////////////////
@@ -238,7 +237,7 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
             notificationDetails);
       }
     } else if (result2 > time6) {
-      _showDialog1(context);
+      _showDialog2(context);
     }
   }
 
@@ -606,9 +605,40 @@ class _PaminelserScreenState extends State<PaminelserScreen> {
     );
   }
 
-  void _showDialog1(BuildContext context) {
+  _showDialog(BuildContext context) {
     showDialog(
       context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return Container(
+          child: AlertDialog(
+            title: Text("Lời nhắc"),
+            content: Text("Nhập sai, vui lòng nhập lại"),
+          ),
+        );
+      },
+    );
+  }
+
+  _showDialog1(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return Container(
+          child: AlertDialog(
+            title: Text("Lời nhắc"),
+            content: Text("Nhập sai, vui lòng nhập lại"),
+          ),
+        );
+      },
+    );
+  }
+
+  _showDialog2(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return Container(
           child: AlertDialog(
